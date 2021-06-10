@@ -1,66 +1,61 @@
-const User = require("../models/user");
+const { Users } = require("../models");
+const { hash, compare } = require("bcrypt");
 const shortId = require("shortid");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
 // user signup
-exports.signup = (req, res) => {
-  User.findOne({ email: req.body.email }).exec((err, user) => {
-    if (user) {
-      return res.status(400).json({
-        error: "Email is already taken",
-      });
-    }
+exports.signup = async (req, res) => {
 
-    const { name, email, password } = req.body;
-
-    let newUser = new User({ name, email, password });
-    newUser.save((err, success) => {
-      if (err) {
-        return res.status(400).json({
-          error: err,
-        });
-      }
-      // res.json({
-      //   user: success,
-      // });
-      res.json({
-        message: "signup success! please login.",
-      });
+  const findDuplicate = await Users.findOne({ where: { email: req.body.email } });
+  if (findDuplicate) {
+    return res.status(400).json({
+      error: "Email is already taken",
+    });
+  }
+  // hash password
+  await hash(req.body.password, 10, async function (err, hash) {
+    await Users.create({
+      ...req.body,
+      password: hash,
+      role: 'student'
     });
   });
+
+  return res.json({
+    message: "Signup Success! Please Login.",
+  });
+
+
 };
 
 // user signin
-exports.signin = (req, res) => {
+exports.signin = async (req, res) => {
   const { email, password } = req.body;
 
   //check if user exist
-  User.findOne({ email }).exec((err, user) => {
-    if (err || !user) {
-      return res.status(400).json({
-        error: "User with that email does not exist. Please signup",
-      });
-    }
-
-    // authenticate
-    if (!user.authenticate(password)) {
-      return res.status(400).json({
-        error: "Email and password do not match.",
-      });
-    }
-
-    // generate a token and send to client
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
+  const findUser = await Users.findOne({ where: { email } });
+  if (!findUser) {
+    return res.status(400).json({
+      error: "Invalid Credentials",
     });
-
-    res.cookie("token", token, { expiresIn: "1d" });
-    const { _id, username, name, email, role } = user;
-    return res.json({
-      token,
-      user,
+  }
+  const match = await compare(password, findUser.password);
+  if(!match){
+    return res.status(400).json({
+      error: "Invalid Credentials",
     });
+  }
+
+  // generate a token and send to client
+  const token = jwt.sign({ id: findUser.id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+
+  res.cookie("token", token, { expiresIn: "1d" });
+  return res.json({
+    token,
+    user: findUser,
   });
 };
 
