@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Users } = require("../models");
 const { hash, compare } = require("bcrypt");
 const shortId = require("shortid");
@@ -29,34 +30,23 @@ exports.signup = async (req, res) => {
 
 };
 
-// user signin
-exports.signin = async (req, res) => {
+// student signin
+exports.studentSignin = async (req, res) => {
   const { email, password } = req.body;
 
   //check if user exist
-  const findUser = await Users.findOne({ where: { email } });
-  if (!findUser) {
-    return res.status(400).json({
-      error: "Invalid Credentials",
-    });
-  }
-  const match = await compare(password, findUser.password);
-  if(!match){
-    return res.status(400).json({
-      error: "Invalid Credentials",
-    });
-  }
+  const findUser = await Users.findOne({ where: { [Op.and]: [{email}, {role: 'student'}] } });
+  await createJWT(findUser, password, res);
 
-  // generate a token and send to client
-  const token = jwt.sign({ id: findUser.id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+};
 
-  res.cookie("token", token, { expiresIn: "1d" });
-  return res.json({
-    token,
-    user: findUser,
-  });
+// admin signin
+exports.adminSignin = async (req, res) => {
+  const { email, password } = req.body;
+
+  //check if user exist
+  const findUser = await Users.findOne({ where: { [Op.and]: [{email}, {role: 'admin'}] } });
+  await createJWT(findUser, password, res);
 };
 
 exports.signout = (req, res) => {
@@ -100,3 +90,29 @@ exports.adminMiddleware = (req, res, next) => {
     next();
   });
 };
+
+async function createJWT(findUser, password, res){
+
+  if (!findUser) {
+    return res.status(400).json({
+      error: "Invalid Credentials",
+    });
+  }
+  const match = await compare(password, findUser.password);
+  if(!match){
+    return res.status(400).json({
+      error: "Invalid Credentials",
+    });
+  }
+
+  // generate a token and send to client
+  const token = jwt.sign({ id: findUser.id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+
+  res.cookie("token", token, { expiresIn: "1d" });
+  return res.json({
+    token,
+    user: findUser,
+  });
+}

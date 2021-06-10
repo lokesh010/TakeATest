@@ -1,9 +1,9 @@
 const express = require("express");
-
 const route = express.Router();
 const {
+  studentSignin,
+  adminSignin,
   signup,
-  signin,
   signout,
   requireSignin,
 } = require("../controllers/authControllers");
@@ -17,7 +17,8 @@ const {
 
 //pass on controllers
 route.post("/signup", userSignupValidator, runValidation, signup);
-route.post("/signin", userSigninValidator, runValidation, signin);
+route.post("/student/signin", userSigninValidator, runValidation, studentSignin);
+route.post("/admin/signin", userSigninValidator, runValidation, adminSignin);
 route.get("/signout", signout);
 
 // test
