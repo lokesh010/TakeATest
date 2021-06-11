@@ -32,6 +32,8 @@ export const studentSignin = (user) => {
       return res.json();
     })
     .catch((err) => {
+      removeCookie("token");
+      removeLocalStorage("user");
       return err;
     });
 };
@@ -49,6 +51,8 @@ export const adminSignin = (user) => {
       return res.json();
     })
     .catch((err) => {
+      removeCookie("token");
+  removeLocalStorage("user");
       return err;
     });
 };

@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const Subjects = require('./Tests');
+const Tests = require('./Tests');
 
 module.exports = (sequelize) => {
 	const Questions = sequelize.define('Questions', {
@@ -19,21 +19,22 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER(3),
             allowNull: false,
         },
-        // subjectId:
-        // {
-        //     references:{
-        //         model: Subjects,   
-        //     key: id
-        //     }
-        // }  
+        testId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Tests,
+                key: "id"
+            }
+        }
 	});
 
-    // Questions.associate = models => {
-    //     Questions.belongsTo(models.Subjects, {
-    //         foreignKey: 'subjectId',
-    //         onDelete: "cascade"
-    //     })
-    // }
+    Questions.associate= models => {
+        Questions.belongsTo(models.Tests,{
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
     return Questions
 };
