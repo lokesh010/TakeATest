@@ -1,17 +1,17 @@
 import React from 'react'
 // images
-import sliderIcon from '../assets/images/slider-icon.png'
-import leftImage from '../assets/images/left-image.png'
-import icon1 from "../assets/images/about-icon-01.png"
-import icon2 from "../assets/images/about-icon-02.png"
-import icon3 from "../assets/images/about-icon-03.png"
-import rightImage from "../assets/images/right-image.png"
+import sliderIcon from '../assets/homepage/images/slider-icon.png'
+import leftImage from '../assets/homepage/images/left-image.png'
+import icon1 from "../assets/homepage/images/about-icon-01.png"
+import icon2 from "../assets/homepage/images/about-icon-02.png"
+import icon3 from "../assets/homepage/images/about-icon-03.png"
+import rightImage from "../assets/homepage/images/right-image.png"
 // components
 import PageLayout from '../layouts/page.layout'
 
 export default () => 
     <PageLayout>
-        <div class="welcome-area mt-4" id="welcome">
+        <div class="welcome-area mt-0" id="welcome">
             <div class="header-text">
                 <div class="container">
                     <div class="row">
@@ -54,7 +54,6 @@ export default () =>
                 </div>
             </div>
         </section>
-
         
         <section class="section" id="about2">
             <div class="container">

@@ -10,7 +10,7 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import logo from '../assets/images/logo.png'
+import logo from '../assets/homepage/images/logo.png'
 import { withRouter } from "react-router-dom";
 
 const Header = ({ history }) => {
@@ -35,12 +35,12 @@ const Header = ({ history }) => {
               <React.Fragment>
                 <NavItem>
                   <Link to="/signup">
-                    <NavLink style={{ cursor: "pointer" }}>Signup</NavLink>
+                    <NavLink style={{ cursor: "pointer", fontSize: '1.3em' }}>Register</NavLink>
                   </Link>
                 </NavItem>
                 <NavItem>
                   <Link to="/student/signin">
-                    <NavLink style={{ cursor: "pointer" }}>Signin</NavLink>
+                    <NavLink style={{ cursor: "pointer", fontSize: '1.3em' }}>Login</NavLink>
                   </Link>
                 </NavItem>
               </React.Fragment>
