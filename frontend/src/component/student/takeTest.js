@@ -65,14 +65,14 @@ const Test = () => {
                     {questions.length && questions.map((question, i) =>
                         <div className="card shadow">
                             {/* Accordion header */}
-                            <div className="card-header bg-dark text-white btn text-left" id="headingOne" data-target={`#${i}`} data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                            <div className="card-header bg-dark text-white text-left" id="headingOne" >
                                 <h5 className="my-2 p-2">
                                     {i + 1}) {question.question} <b>{question.marks ? `[${question.marks}]` : null}</b>
                                 </h5>
                             </div>
 
                             {/* Accordion Body */}
-                            <div id={i} className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div id={i} className="collapse show">
                                 <div className="card-body bg-light">
                                     <div className="d-flex ">
                                         {/* map answers */}
