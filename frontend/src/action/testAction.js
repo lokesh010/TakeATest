@@ -36,9 +36,10 @@ export const read = () => {
     });
 };
 
-export const destroy = (id) => {
-  return fetch(`${API}/test/${id}`, {
-    method: "DELETE",
+//  for taking test
+export const getTestQuestions = (testId) => {
+  return fetch(`${API}/test/${testId}/questions`, {
+    method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -54,10 +55,19 @@ export const destroy = (id) => {
 };
 
 
-
-// get cookie
-export const getCookie = (key) => {
-  if (process.browser) {
-    return cookie.get(key);
-  }
+export const destroy = (id) => {
+  return fetch(`${API}/test/${id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return err;
+    });
 };

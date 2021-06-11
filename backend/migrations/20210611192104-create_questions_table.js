@@ -23,10 +23,12 @@ module.exports = {
       // fk
       TestId:
       {
-        type: DataTypes.INTEGER(11),
+        type: DataTypes.INTEGER,
         field: 'test_id',
-        allowNull: false,
-        unique: false 
+        references: {
+          model: "Tests",
+          key: "id"
+        }
       },
       // Timestamps
       createdAt: Sequelize.DATE,

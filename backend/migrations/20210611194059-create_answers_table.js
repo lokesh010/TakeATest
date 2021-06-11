@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.createTable('Answers', { 
+    await queryInterface.createTable('Answers', {
 
       id: {
         allowNull: false,
@@ -24,16 +24,19 @@ module.exports = {
       // fk
       QuestionId:
       {
-        type: DataTypes.INTEGER(11),
+        type: DataTypes.INTEGER,
         field: 'question_id',
-        allowNull: false,
-        unique: false
+        references: {
+          model: "Questions",
+          key: "id"
+        },
+        onDelete: 'CASCADE'
       },
       // Timestamps
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
-      });
-     
+    });
+
   },
 
   down: async (queryInterface, Sequelize) => {
