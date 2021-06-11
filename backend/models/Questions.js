@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const Subjects = require('./Subjects');
+const Subjects = require('./Tests');
 
 module.exports = (sequelize) => {
 	const Questions = sequelize.define('Questions', {
@@ -28,12 +28,12 @@ module.exports = (sequelize) => {
         // }  
 	});
 
-    Questions.associate = models => {
-        Questions.belongsTo(models.Subjects, {
-            foreignKey: 'subjectId',
-            onDelete: "cascade"
-        })
-    }
+    // Questions.associate = models => {
+    //     Questions.belongsTo(models.Subjects, {
+    //         foreignKey: 'subjectId',
+    //         onDelete: "cascade"
+    //     })
+    // }
 
     return Questions
 };
