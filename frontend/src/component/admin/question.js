@@ -148,18 +148,18 @@ export default () => {
     return (
         <AdminDashboardLayout title={"Questions and Answers"}>
             {/* Container fluid  */}
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12">
-                        <div class="white-box">
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-12 col-lg-12 col-sm-12">
+                        <div className="white-box">
                             {/* test selection */}
-                            <div class="mb-3">
-                                <h3 class="box-title mb-0">Create Questions for Test</h3>
+                            <div className="mb-3">
+                                <h3 className="box-title mb-0">Create Questions for Test</h3>
                                 <br />
                                 <div className="w-25">
                                     <span className="text-bold">Choose a Test:</span>
                                     {/* select test */}
-                                    <select class="form-select shadow-none border-top"
+                                    <select className="form-select shadow-none border-top"
                                         value={selectTest ? selectTest.id : null}
                                         onChange={e => setSelectTest(
                                             testList.find(test => test.id == e.target.value)
@@ -193,23 +193,23 @@ export default () => {
                             {/* questions accordion */}
                             <div id="accordion">
                                 {questions.length && questions.map((question, i) =>
-                                    <div class="card shadow">
+                                    <div className="card shadow">
                                         {/* Accordion header */}
-                                        <div class="card-header bg-dark text-white btn text-left" id="headingOne" data-target={`#${i}`} data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
-                                            <h5 class="my-2 p-2">
+                                        <div className="card-header bg-dark text-white btn text-left" id="headingOne" data-target={`#${i}`} data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                                            <h5 className="my-2 p-2">
                                                 {i + 1}) {question.question} <b>{question.marks ? `[${question.marks}]` : null}</b>
                                             </h5>
                                         </div>
 
                                         {/* Accordion Body */}
-                                        <div id={i} class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                            <div class="card-body bg-light">
+                                        <div id={i} className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div className="card-body bg-light">
                                                 {/* input and delete question */}
                                                 <div className="d-flex">
-                                                    <input class="form-control w-75" placeholder="Enter Question" type="text" required
+                                                    <input className="form-control w-75" placeholder="Enter Question" type="text" required
                                                         value={question.question} onChange={(e) => questionChangeHandler(e, i)}
                                                     />
-                                                    <input class="form-control w-25" placeholder="Enter Marks" type="number" required
+                                                    <input className="form-control w-25" placeholder="Enter Marks" type="number" required
                                                         value={question.marks} onChange={(e) => marksChangeHandler(e, i)}
                                                     />
                                                     <button className="btn btn-danger ml-auto text-white"
@@ -227,7 +227,7 @@ export default () => {
                                                                 onChange={e => checkboxChangeHandler(i, i2, e)}
                                                             />
                                                             {/* answer input */}
-                                                            <input class="form-control w-75" placeholder="Enter Answer" type="text" required
+                                                            <input className="form-control w-75" placeholder="Enter Answer" type="text" required
                                                                 value={answer.answer} onChange={(e) => answerChangeHandler(i, i2, e)}
                                                             />
                                                         </div>

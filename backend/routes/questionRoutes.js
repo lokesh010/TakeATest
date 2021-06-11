@@ -4,9 +4,10 @@ const { createWithAnswers, read, destroy } = require("../controllers/questionCon
 const {
   requireSignin,
   authMiddleware,
+  adminMiddleware
 } = require("../controllers/authControllers");
 
-router.post("/", createWithAnswers);
+router.post("/", adminMiddleware, createWithAnswers);
 router.get("/", read);
 router.delete("/:id", destroy);
 

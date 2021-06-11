@@ -5,7 +5,7 @@ const shortId = require("shortid");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
-// user signup
+// student signup
 exports.signup = async (req, res) => {
 
   const findDuplicate = await Users.findOne({ where: { email: req.body.email } });
@@ -29,13 +29,37 @@ exports.signup = async (req, res) => {
 
 
 };
+// student signup
+exports.registerAdmin = async (req, res) => {
+
+  const findDuplicate = await Users.findOne({ where: { email: req.body.email } });
+  if (findDuplicate) {
+    return res.status(400).json({
+      error: "Email is already taken",
+    });
+  }
+  // hash password
+  await hash(req.body.password, 10, async function (err, hash) {
+    await Users.create({
+      ...req.body,
+      password: hash,
+      role: 'admin'
+    });
+  });
+
+  return res.json({
+    message: "Signup Success! Please Login.",
+  });
+
+
+};
 
 // student signin
 exports.studentSignin = async (req, res) => {
   const { email, password } = req.body;
 
   //check if user exist
-  const findUser = await Users.findOne({ where: { [Op.and]: [{email}, {role: 'student'}] } });
+  const findUser = await Users.findOne({ where: { [Op.and]: [{ email }, { role: 'student' }] } });
   await createJWT(findUser, password, res);
 
 };
@@ -45,7 +69,7 @@ exports.adminSignin = async (req, res) => {
   const { email, password } = req.body;
 
   //check if user exist
-  const findUser = await Users.findOne({ where: { [Op.and]: [{email}, {role: 'admin'}] } });
+  const findUser = await Users.findOne({ where: { [Op.and]: [{ email }, { role: 'admin' }] } });
   await createJWT(findUser, password, res);
 };
 
@@ -61,37 +85,47 @@ exports.requireSignin = expressJwt({
   algorithms: ["HS256"],
 });
 
-exports.authMiddleware = (req, res, next) => {
-  const authUserId = req.user._id;
-  User.findById({ _id: authUserId }).exec((err, user) => {
-    if (err || !user) {
-      return res.status(400).json({
-        error: "User not found",
-      });
-    }
-    req.profile = user;
-    next();
-  });
+// Middlewares
+exports.authMiddleware = async (req, res, next) => {  
+  const tokenpayload = getTokenUser(req,res);
+
+  if(!tokenpayload){
+    return res.status(400).json({
+      error: "Access denied",
+    });
+  }
+
+  const user = await Users.findByPk(tokenpayload.id);
+
+  if (!user){
+    return res.status(400).json({
+      error: "Private resource Access denied",
+    });
+  }
+  next();
 };
 
-exports.adminMiddleware = (req, res, next) => {
-  const adminUserId = req.user._id;
-  User.findById({ _id: adminUserId }).exec((err, user) => {
-    if (err || !user) {
-      return status(400).json({
-        error: "Admin User not found",
-      });
-    }
-    if (user.role !== 1) {
-      return res.status(400).json({
-        error: "Admin resource Access denied",
-      });
-    }
-    next();
-  });
+exports.adminMiddleware = async (req, res, next) => {
+  const tokenpayload = getTokenUser(req,res);
+
+  if(!tokenpayload){
+    return res.status(400).json({
+      error: "Access denied",
+    });
+  }
+
+  const user = await Users.findByPk(tokenpayload.id);
+
+  if (!user || user.role !== 'admin'){
+    return res.status(400).json({
+      error: "Admin resource Access denied",
+    });
+  }
+  next();
+
 };
 
-async function createJWT(findUser, password, res){
+async function createJWT(findUser, password, res) {
 
   if (!findUser) {
     return res.status(400).json({
@@ -99,7 +133,7 @@ async function createJWT(findUser, password, res){
     });
   }
   const match = await compare(password, findUser.password);
-  if(!match){
+  if (!match) {
     return res.status(400).json({
       error: "Invalid Credentials",
     });
@@ -115,4 +149,10 @@ async function createJWT(findUser, password, res){
     token,
     user: findUser,
   });
+}
+
+function getTokenUser(req,res){
+  const rawToken = req.headers['set-cookie'][0];
+
+  return jwt.decode(rawToken);
 }

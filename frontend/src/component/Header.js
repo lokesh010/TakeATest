@@ -29,18 +29,37 @@ const Header = ({ history }) => {
           </NavbarBrand>
         </Link>
         <NavbarToggler onClick={toggle} />
+        
+        <Nav className="ml-auto" navbar>
+            {!isAuth() && (
+              <React.Fragment>
+                <NavItem>
+                  <Link to="/">
+                    <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Home</NavLink>
+                  </Link>
+                </NavItem>
+              </React.Fragment>
+            )}
+
+          </Nav>
+        {/* right nav */}
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {!isAuth() && (
               <React.Fragment>
                 <NavItem>
                   <Link to="/signup">
-                    <NavLink style={{ cursor: "pointer", fontSize: '1.3em' }}>Register</NavLink>
+                    <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Register</NavLink>
                   </Link>
                 </NavItem>
                 <NavItem>
                   <Link to="/student/signin">
-                    <NavLink style={{ cursor: "pointer", fontSize: '1.3em' }}>Login</NavLink>
+                    <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Student Login</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/admin/signin">
+                    <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Admin Login</NavLink>
                   </Link>
                 </NavItem>
               </React.Fragment>
@@ -54,17 +73,7 @@ const Header = ({ history }) => {
                   }'s Dashboard`}</NavLink>
                 </Link>
               </NavItem>
-            )}
-
-            {isAuth() && isAuth().role === 1 && (
-              <NavItem>
-                <Link to="/admin">
-                  <NavLink style={{ cursor: "pointer" }}>{`${
-                    isAuth().name
-                  }'s Dashboard`}</NavLink>
-                </Link>
-              </NavItem>
-            )}
+            )}          
 
             {isAuth() && (
               <NavItem>

@@ -3,38 +3,40 @@ const { DataTypes } = require('sequelize');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Questions', {
+     await queryInterface.createTable('Answers', { 
+
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      question:
+      answer:
       {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      marks:
+      correct:
       {
-        type: DataTypes.INTEGER(3),
+        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
       // fk
-      TestId:
+      QuestionId:
       {
         type: DataTypes.INTEGER(11),
-        field: 'test_id',
+        field: 'question_id',
         allowNull: false,
-        unique: false 
+        unique: false
       },
       // Timestamps
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
-    });
+      });
+     
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Questions');
+    await queryInterface.dropTable('Answers');
   }
 };

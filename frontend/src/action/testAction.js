@@ -1,5 +1,6 @@
-import fetch from "isomorphic-fetch";
+import fetch from "./fetch";
 import { API } from "../config/config";
+import cookie from "js-cookie";
 
 export const create = (test) => {
   return fetch(`${API}/test`, {
@@ -50,4 +51,13 @@ export const destroy = (id) => {
     .catch((err) => {
       return err;
     });
+};
+
+
+
+// get cookie
+export const getCookie = (key) => {
+  if (process.browser) {
+    return cookie.get(key);
+  }
 };

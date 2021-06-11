@@ -53,7 +53,7 @@ const Test = () => {
     return (
         <AdminDashboardLayout title={"Test"}>
             {/* Container fluid  */}
-            <div class="container-fluid">
+            <div className="container-fluid">
                 {/* create test */}
                 <TestCreateForm form={form} changeHandler={changeHandler} submitForm={submitForm} />
                 {/* All tests */}

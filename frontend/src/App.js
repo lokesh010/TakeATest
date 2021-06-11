@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AdminRoutes from './component/private/AdminRoutes'
+import { isAuth } from "./action/authAction";
 // component
 import HomeAdmin from "./component/admin";
 import HomeStudent from "./component/student";
@@ -13,11 +14,17 @@ import StudentSignin from "./pages/StudentSignIn";
 import AdminSignin from "./pages/AdminSignIn";
 import Home from "./pages/home";
 
+
+// useEffect(() => {
+//     if(!isAuth()){
+
+//     }
+// },[])
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Protected /> */}
+        <Protected />
         <Switch>
           {/* pages */}
           <Route path="/" component={Home} exact />
