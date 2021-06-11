@@ -4,10 +4,10 @@ import SigninComponent from "../component/SigninComponent";
 const Signin = () => {
   return (
     <React.Fragment>
-      <h2 className="text-center pt-4 pb-4">SignIn</h2>
+      <h2 className="text-center pt-4 pb-4">Admin SignIn</h2>
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <SigninComponent />
+          <SigninComponent role={'admin'} />
         </div>
       </div>
     </React.Fragment>

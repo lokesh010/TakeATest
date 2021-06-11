@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { isAuth, signup } from "../action/authAcation";
+import { isAuth, signup } from "../action/authAction";
 import { withRouter } from "react-router-dom";
 
 const SignUpComponet = ({ history }) => {
   const [values, setValues] = useState({
-    name: "",
+    fullName: "",
+    phone: "",
+    address: "",
     email: "",
     password: "",
     error: "",
@@ -13,17 +15,17 @@ const SignUpComponet = ({ history }) => {
     showForm: true,
   });
 
-  const { name, email, password, error, loading, message, showForm } = values;
+  const { fullName, phone, address, email, password, error, loading, message, showForm } = values;
   useEffect(() => {
     isAuth() && history.push("/");
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.table({ name, email, password, error, loading, message, showForm });
+    console.table({ fullName, email, password, error, loading, message, showForm });
 
     setValues({ ...values, loading: true, error: false });
-    const user = { name, email, password };
+    const user = { fullName, email, password, phone, address };
 
     try {
       signup(user).then((data) => {
@@ -34,7 +36,9 @@ const SignUpComponet = ({ history }) => {
           } else {
             setValues({
               ...values,
-              name: "",
+              fullName: "",
+              phone: "",
+              address: "",
               email: "",
               password: "",
               error: "",
@@ -53,10 +57,10 @@ const SignUpComponet = ({ history }) => {
   };
 
   const handleChange = (name) => (e) => {
-    setValues({ ...values, error: false, [name]: e.target.value });
+    setValues({ ...values, error: false, [name]:  e.target.value });
   };
 
-  const showLaoding = () =>
+  const showLoading = () =>
     loading ? <div className="alert alert-info">Loading...</div> : "";
   const showError = () =>
     error ? <div className="alert alert-danger">{error}</div> : "";
@@ -69,11 +73,29 @@ const SignUpComponet = ({ history }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
-              value={name}
-              onChange={handleChange("name")}
+              value={fullName}
+              onChange={handleChange("fullName")}
               type="text"
               className="form-control"
-              placeholder="Type your name"
+              placeholder="Type your Full Name"
+            />
+            <br />
+
+            <input
+              value={phone}
+              onChange={handleChange("phone")}
+              type="number"
+              className="form-control"
+              placeholder="Type your phone"
+            />
+            <br />
+
+            <input
+              value={address}
+              onChange={handleChange("address")}
+              type="text"
+              className="form-control"
+              placeholder="Type your adress"
             />
             <br />
 
@@ -104,7 +126,7 @@ const SignUpComponet = ({ history }) => {
 
   return (
     <div className="container">
-      {showLaoding()}
+      {showLoading()}
       {showError()}
       {showMessage()}
       {showForm && signupForm()}

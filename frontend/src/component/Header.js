@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { isAuth, signout } from "../action/authAcation";
+import { isAuth, signout } from "../action/authAction";
 import {
   Collapse,
   Navbar,
@@ -10,6 +10,7 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import logo from '../assets/images/logo.png'
 import { withRouter } from "react-router-dom";
 
 const Header = ({ history }) => {
@@ -24,7 +25,7 @@ const Header = ({ history }) => {
             style={{ cursor: "pointer" }}
             className="font-weight-bold"
           >
-            LOGO HERE
+            <img src={logo} height="60"/>
           </NavbarBrand>
         </Link>
         <NavbarToggler onClick={toggle} />
@@ -38,7 +39,7 @@ const Header = ({ history }) => {
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link to="/signin">
+                  <Link to="/student/signin">
                     <NavLink style={{ cursor: "pointer" }}>Signin</NavLink>
                   </Link>
                 </NavItem>
@@ -69,7 +70,7 @@ const Header = ({ history }) => {
               <NavItem>
                 <NavLink
                   style={{ cursor: "pointer" }}
-                  onClick={() => signout(() => history.push("/signin"))}
+                  onClick={() => signout(() => history.push("/home"))}
                 >
                   SignOut
                 </NavLink>

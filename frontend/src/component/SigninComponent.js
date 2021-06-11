@@ -1,11 +1,11 @@
-import { signin, autheticate, isAuth } from "../action/authAcation";
+import { studentSignin, adminSignin, autheticate, isAuth } from "../action/authAction";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
-const SigninComponent = ({ history }) => {
+const SigninComponent = ({ history, role }) => {
   const [values, setValues] = useState({
-    email: "alamin@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
     error: "",
     loading: false,
     message: "",
@@ -20,31 +20,33 @@ const SigninComponent = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.table({ name, email, password, error, loading, message, showForm });
 
     setValues({ ...values, loading: true, error: false });
     const user = { email, password };
 
-    signin(user).then((data) => {
-      try {
-        if (data.error) {
-          setValues({ ...values, error: data.error, loading: false });
-        } else {
-          //save user token to cookie
-          //save user info to localStroage
-          //authenticate user
-          autheticate(data, () => {
-            if (isAuth() && isAuth().role === 1) {
-              history.push("/admin");
-            } else {
-              history.push("/user");
-            }
-          });
+    (role === 'admin'
+      ? adminSignin(user)
+      : studentSignin(user))
+      .then((data) => {
+        try {
+          if (data.error) {
+            setValues({ ...values, error: data.error, loading: false });
+          } else {
+            //save user token to cookie
+            //save user info to localStroage
+            //authenticate user
+            autheticate(data, () => {
+              if (isAuth() && isAuth().role === 'admin') {
+                history.push("/admin/dashboard");
+              } else {
+                history.push("/student/dashboard");
+              }
+            });
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
-    });
+      });
   };
 
   const handleChange = (name) => (e) => {

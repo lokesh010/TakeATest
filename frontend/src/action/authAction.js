@@ -3,7 +3,7 @@ import { API } from "../config/config";
 import cookie from "js-cookie";
 
 export const signup = (user) => {
-  return fetch(`${API}/signup`, {
+  return fetch(`${API}/auth/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -19,8 +19,25 @@ export const signup = (user) => {
     });
 };
 
-export const signin = (user) => {
-  return fetch(`http://localhost:8000/api/signin`, {
+export const studentSignin = (user) => {
+  return fetch(`${API}/auth/student/signin`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const adminSignin = (user) => {
+  return fetch(`${API}/auth/admin/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -41,7 +58,7 @@ export const signout = (next) => {
   removeLocalStorage("user");
   next();
 
-  return fetch(`http://localhost:8000/api/signout`, {
+  return fetch(`${API}/auth/signout`, {
     method: "GET",
   })
     .then((response) => {
