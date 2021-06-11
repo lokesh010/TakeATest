@@ -69,6 +69,13 @@ function DashboardLayout({ title, children, history }) {
                                 </a>
                             </li>
                             <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="question"
+                                    aria-expanded="false">
+                                    <i class="fa fa-table" aria-hidden="true"></i>
+                                    <span class="hide-menu">Questions And Answers</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="results"
                                     aria-expanded="false">
                                     <i class="fa fa-font" aria-hidden="true"></i>
@@ -111,7 +118,6 @@ function DashboardLayout({ title, children, history }) {
                         </div>
                     </div>
                 </div>
-
                 {children}
                 {/* footer */}
                 <footer class="footer text-center"> TakeATest </footer>

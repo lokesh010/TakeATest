@@ -6,6 +6,7 @@ import HomeAdmin from "./component/admin";
 import HomeStudent from "./component/student";
 import Protected from "./component/private/Protected";
 import Test from "./component/admin/test";
+import Question from "./component/admin/question";
 // pages
 import SignUP from "./pages/SignUp";
 import StudentSignin from "./pages/StudentSignIn";
@@ -33,6 +34,9 @@ function App() {
           </AdminRoutes>
           <AdminRoutes path="/admin/test">
             <Test/>
+          </AdminRoutes>
+          <AdminRoutes path="/admin/question">
+            <Question/>
           </AdminRoutes>
           {/* 404 */}
           {/* <Route path="/*" component={HomeStudent} exact /> */}
