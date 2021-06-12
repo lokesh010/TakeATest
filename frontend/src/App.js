@@ -36,7 +36,7 @@ function App() {
           <Route path="/student/signin" component={StudentSignin} exact />
           <Route path="/admin/signin" component={AdminSignin} exact />
           {/* admin protected routes */}
-          <AdminRoutes path="/admin/dashboard">
+          <AdminRoutes path="/admin/dashboard" exact>
             <HomeAdmin/>
           </AdminRoutes>
           <AdminRoutes path="/admin/test">
@@ -46,10 +46,10 @@ function App() {
             <Question/>
           </AdminRoutes>
           {/* student protected routes */}
-          <StudentRoutes path="/student/dashboard">
+          <StudentRoutes path="/student/dashboard" exact>
             <HomeStudent/>
           </StudentRoutes>
-          <StudentRoutes path="/student/test">
+          <StudentRoutes path="/student/test" exact>
             <TestList/>
           </StudentRoutes>
           <StudentRoutes path="/student/test/:id/take">

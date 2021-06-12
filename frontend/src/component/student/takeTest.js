@@ -56,8 +56,7 @@ const Test = () => {
         <StudentDashboardLayout title={"Test"}>
             {/* Container fluid  */}
             <div className="container-fluid">
-                {/* All tests */}
-                <TestList testList={testList} />
+                Test Appear here
             </div>
         </StudentDashboardLayout>
     );
