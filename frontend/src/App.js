@@ -1,12 +1,14 @@
 import React, {useEffect} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AdminRoutes from './component/private/AdminRoutes'
-import { isAuth } from "./action/authAction";
+import StudentRoutes from './component/private/StudentRoutes'
 // component
 import HomeAdmin from "./component/admin";
 import HomeStudent from "./component/student";
 import Protected from "./component/private/Protected";
 import Test from "./component/admin/test";
+import TestList from "./component/student/testList";
+import TakeTest from "./component/student/takeTest";
 import Question from "./component/admin/question";
 // pages
 import SignUP from "./pages/SignUp";
@@ -33,8 +35,6 @@ function App() {
           {/* logins */}
           <Route path="/student/signin" component={StudentSignin} exact />
           <Route path="/admin/signin" component={AdminSignin} exact />
-          <Route path="/student/dashboard" component={HomeStudent} exact />
-          {/* <Route path="/admin/test" component={Test} exact /> */}
           {/* admin protected routes */}
           <AdminRoutes path="/admin/dashboard">
             <HomeAdmin/>
@@ -45,6 +45,17 @@ function App() {
           <AdminRoutes path="/admin/question">
             <Question/>
           </AdminRoutes>
+          {/* student protected routes */}
+          <StudentRoutes path="/student/dashboard">
+            <HomeStudent/>
+          </StudentRoutes>
+          <StudentRoutes path="/student/test">
+            <TestList/>
+          </StudentRoutes>
+          <StudentRoutes path="/student/test/:id/take">
+            <TakeTest/>
+          </StudentRoutes>
+
           {/* 404 */}
           {/* <Route path="/*" component={HomeStudent} exact /> */}
         </Switch>

@@ -7,8 +7,8 @@ const {
   adminMiddleware,
 } = require("../controllers/authControllers");
 
-router.post("/", create);
-router.get("/", adminMiddleware, read);
-router.delete("/:id", destroy);
+router.post("/", adminMiddleware, create);
+router.get("/", read);
+router.delete("/:id", adminMiddleware, destroy);
 
 module.exports = router;

@@ -9,6 +9,6 @@ const {
 
 router.post("/", adminMiddleware, createWithAnswers);
 router.get("/", read);
-router.delete("/:id", destroy);
+router.delete("/:id", adminMiddleware, destroy);
 
 module.exports = router;
