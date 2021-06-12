@@ -34,3 +34,20 @@ export const getMyResult = () => {
       return {status: 400, msg: err};
     });
 };
+
+export const getMyTestAnswers = (TestId, take_count) => {
+  return fetch(`${API}/results/test/${TestId}/take/${take_count}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return {status: 400, msg: err};
+    });
+};

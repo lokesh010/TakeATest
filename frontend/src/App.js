@@ -11,6 +11,7 @@ import HomeStudent from "./component/student";
 import TestList from "./component/student/testList";
 import TakeTest from "./component/student/takeTest";
 import MyResults from "./component/student/myResults";
+import CheckTestAnswers from "./component/student/tables/checkTestAnswers";
 // pages
 import SignUP from "./pages/SignUp";
 import StudentSignin from "./pages/StudentSignIn";
@@ -49,11 +50,14 @@ function App() {
           <StudentRoutes path="/student/test" exact>
             <TestList />
           </StudentRoutes>
-          <StudentRoutes path="/student/test/:id/take">
+          <StudentRoutes path="/student/test/:id/take" exact>
             <TakeTest />
           </StudentRoutes>
           <StudentRoutes path="/student/results">
             <MyResults />
+          </StudentRoutes>
+          <StudentRoutes path="/student/test/:TestId/take/:take_count" exact>
+            <CheckTestAnswers />
           </StudentRoutes>
 
           {/* 404 */}

@@ -15,7 +15,6 @@ const Test = () => {
         setResults(getResults);
     }, [])
 
-    console.log(results)
     return (
         <StudentDashboardLayout title={"My Results"}>
             {/* Container fluid  */}

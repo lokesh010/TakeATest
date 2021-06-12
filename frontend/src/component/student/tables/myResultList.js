@@ -2,15 +2,10 @@ import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const tableColumns = ['S.N', 'Test Name', 'Participate Count', 'Participate Date','Pass Marks', 'Total Marks', 'Actions'];
+const tableColumns = ['S.N', 'Test Name', 'Test Taken Count', 'Status', 'Obtained Marks', 'Pass Marks', 'Total Marks', 'Actions'];
 
-export default React.memo(({ resultList }) => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+export default React.memo(({ resultList }) => 
 
-    const [selectedTestId, setselectedTestId] = useState(1);
-    return (
         <div className="row">
             <div className="col-md-12 col-lg-12 col-sm-12">
                 <div className="white-box">
@@ -31,18 +26,27 @@ export default React.memo(({ resultList }) => {
                                     resultList.map((test, i) =>
                                         <tr key={i}>
                                             <td>{i + 1}</td>
-                                            <td className="txt-oflo">{test.name}</td>
-                                            <td>{test.description}</td>
-                                            <td className="text-info">{test.passMarks}</td>
-                                            <td><span className="text-success">{test.totalMarks}</span></td>
-                                            <td>
-                                                <Button variant="primary" onClick={()=> {
-                                                    handleShow();
-                                                    setselectedTestId(test.id);
-                                                    }}>
-                                                    Take Test
-                                                </Button>
+                                            <td className="txt-oflo">{test.Test.name}</td>
+                                            <td>{test.take_count}</td>
+                                            <td
+                                            className={test.obtainedMarks < test.Test.passMarks? 'text-danger': 'text-success'}
+                                            >{test.obtainedMarks < test.Test.passMarks? 'Failed': 'Passed'}</td>
+                                            <td className={`
+                                            font-weight-bold 
+                                            ${test.obtainedMarks < test.Test.passMarks? 'text-danger': 'text-success'}
+                                            `}>
+                                                {test.obtainedMarks}
                                             </td>
+                                            <td><span>{test.Test.passMarks}</span></td>
+                                            <td><span>{test.Test.totalMarks}</span></td>
+                                            <td>
+                                            <Link to={`/student/test/${test.TestId}/take/${test.take_count}`}>
+                                                <Button variant="primary">
+                                                    Check Answers
+                                                </Button>
+                                                </Link>
+                                            </td>
+
                                         </tr>
                                     )
                                     : <tr className="mt-4"><td>No data available</td></tr>
@@ -51,25 +55,6 @@ export default React.memo(({ resultList }) => {
                         </table>
                     </div>
                 </div>
-                {/* Confirm Modal */}
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Participate Confirmation</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Are you sure you want to take this test?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="outline-secondary" onClick={handleClose}>
-                            No
-                        </Button>
-                        <Link to={`/student/test/${selectedTestId}/take`}>
-                        <Button variant="primary" onClick={handleClose}>
-                            Yes
-                        </Button>
-                        </Link>
-                    </Modal.Footer>
-                </Modal>
             </div>
         </div>
-    )
-}
 )

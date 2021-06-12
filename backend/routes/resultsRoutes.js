@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { create, getMyResult, 
+const { create, getMyResult, getMyTestAnswers,
   // getAll, getByUser
  } = require("../controllers/resultsControllers");
 const {
@@ -15,5 +15,6 @@ const {
 // create by students after taking test
 router.post("/", authMiddleware, create);
 router.get("/my-results", authMiddleware, getMyResult);
+router.get("/test/:TestId/take/:take_count", authMiddleware, getMyTestAnswers);
 
 module.exports = router;
