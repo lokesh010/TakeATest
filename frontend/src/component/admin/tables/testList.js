@@ -14,13 +14,13 @@ export default React.memo(({ testList, deleteHandler }) =>
                         {/* table head */}
                         <thead>
                             <tr>
-                                {tableColumns.map(column => <th className="border-top-0">{column}</th>)}
+                                {tableColumns.map((column, i) => <th className="border-top-0" key={i}>{column}</th>)}
                             </tr>
                         </thead>
                         <tbody>
                             {testList.length ?
                                 testList.map((test, i) =>
-                                    <tr>
+                                    <tr  key={i}>
                                         <td>{i + 1}</td>
                                         <td className="txt-oflo">{test.name}</td>
                                         <td>{test.description}</td>
@@ -29,7 +29,7 @@ export default React.memo(({ testList, deleteHandler }) =>
                                         <td><button className="btn btn-danger" onClick={() => deleteHandler(test.id)}>Delete</button></td>
                                     </tr>
                                 )
-                                : <div className="mt-4"><div>No data available</div></div>
+                                : <tr className="mt-4"><td>No data available</td></tr>
                             }
                         </tbody>
                     </table>

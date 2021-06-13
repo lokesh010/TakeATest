@@ -33,6 +33,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       // Timestamps
+      deletedAt: DataTypes.DATE,
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });

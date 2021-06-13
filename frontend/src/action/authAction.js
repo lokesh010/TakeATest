@@ -52,7 +52,7 @@ export const adminSignin = (user) => {
     })
     .catch((err) => {
       removeCookie("token");
-  removeLocalStorage("user");
+      removeLocalStorage("user");
       return err;
     });
 };
@@ -122,8 +122,8 @@ export const autheticate = (data, next) => {
 export const isAuth = () => {
   if (process.browser) {
     const cookieChecked = getCookie("token");
-    if (cookieChecked) {
-      if (localStorage.getItem("user")) {
+    if (cookieChecked && cookieChecked !== 'undefined') {
+      if (localStorage.getItem("user") && localStorage.getItem("user") !== 'undefined') {
         return JSON.parse(localStorage.getItem("user"));
       } else {
         return false;

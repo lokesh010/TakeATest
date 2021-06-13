@@ -31,10 +31,20 @@ module.exports = (sequelize, DataTypes) => {
       field: 'pass_marks',
       allowNull: false,
     },
+  }, {
+    // soft delete
+    paranoid: true
   });
 
   Tests.associate = models => {
     Tests.hasMany(models.Questions, {
+      foreignKey: 'TestId',
+      sourceKey: 'id'
+    });
+  };
+
+  Tests.associate = models => {
+    Tests.hasMany(models.Results, {
       foreignKey: 'TestId',
       sourceKey: 'id'
     });

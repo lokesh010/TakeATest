@@ -1,7 +1,6 @@
 const { Op } = require("sequelize");
 const { Users } = require("../models");
 const { hash, compare } = require("bcrypt");
-const shortId = require("shortid");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
@@ -96,6 +95,7 @@ exports.authMiddleware = async (req, res, next) => {
   }
 
   const user = await Users.findByPk(tokenpayload.id);
+  req.user = tokenpayload;
 
   if (!user){
     return res.status(400).json({

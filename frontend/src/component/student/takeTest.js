@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 // layout
 import StudentDashboardLayout from '../../layouts/student-dashboard.layout'
 // action
+import { create } from '../../action/resultsAction'
 import { getTestQuestions } from '../../action/testAction'
 
 const Test = () => {
@@ -15,17 +16,17 @@ const Test = () => {
     const checkboxChangeHandler = (questionId, answerId) => {
         setAnswers(answers.map(answer => {
             // find question
-            if (answer.questionId === questionId) {
-                if (answer.answerId === answerId) {
+            if (answer.QuestionId === questionId) {
+                if (answer.AnswerId === answerId) {
                     return {
                         ...answer,
-                        mark: !answer.mark
+                        chosen: !answer.chosen
                     }
                 } else {
-                    // unmark all question answers
+                    // unchoose all question answers
                     return {
                         ...answer,
-                        mark: false
+                        chosen: false
                     }
                 }
 
@@ -35,7 +36,15 @@ const Test = () => {
         }))
     }
 
-    // const submitForm = () => 
+    const submitForm = async (e) => {
+        e.preventDefault();
+
+        const submit = await create(answers);
+
+        if(submit.status === 200){
+            
+        }
+    }
 
     useEffect(async () => {
         const getQuestions = await getTestQuestions(id);
@@ -46,16 +55,18 @@ const Test = () => {
         getQuestions.map(question =>
             question.Answers.map(answer => {
                 allAnswers.push({
-                    questionId: answer.QuestionId,
-                    answerId: answer.id,
+                    marks: question.marks,
                     correct: answer.correct,
-                    mark: false
+                    chosen: false,
+                    TestId: Number(id),
+                    QuestionId: answer.QuestionId,
+                    AnswerId: answer.id
                 })
             })
         )
         setAnswers(allAnswers);
     }, [])
-    console.log(answers.length && answers.find(({ answerId }) => answerId === 4))
+
     return (
         <StudentDashboardLayout title={"Test"}>
             {/* Container fluid  */}
@@ -63,11 +74,11 @@ const Test = () => {
                 {/* questions accordion */}
                 <div id="accordion">
                     {questions.length && questions.map((question, i) =>
-                        <div className="card shadow">
+                        <div className="card shadow" key={i}>
                             {/* Accordion header */}
                             <div className="card-header bg-dark text-white text-left" id="headingOne" >
                                 <h5 className="my-2 p-2">
-                                    {i + 1}) {question.question} <b>{question.marks ? `[${question.marks}]` : null}</b>
+                                    {i + 1}) {question.question} <b>{question.chosens ? `[${question.chosens}]` : null}</b>
                                 </h5>
                             </div>
 
@@ -77,18 +88,20 @@ const Test = () => {
                                     <div className="d-flex ">
                                         {/* map answers */}
                                         {question.Answers.map((answer, i2) =>
-                                            <div className="w-25 d-flex" style={{ alignItems: 'baseline' }}>
+                                            <div className="w-25 d-flex" style={{ alignItems: 'baseline' }} key={i2}>
                                                 {/* checkbox */}
                                                 <input type="checkbox"
                                                     checked={
                                                         answers.length &&
-                                                        answers.find(({ answerId }) => answerId === answer.id).mark
+                                                        answers.find(({ AnswerId }) => AnswerId === answer.id).chosen
                                                     }
                                                     onChange={e => checkboxChangeHandler(question.id, answer.id)}
                                                 />
                                                 {/* answer input */}
-                                                <label className="form-control w-75 ml-1" placeholder="Enter Answer" type="text" required>
-                                                    {answer.answer} </label>
+                                                <label className="w-50 ml-1"
+                                                style={{cursor: 'pointer'}}
+                                                onClick={e => checkboxChangeHandler(question.id, answer.id)}>
+                                                    {answer.answer}</label>
                                             </div>
                                         )}
                                     </div>
@@ -97,15 +110,15 @@ const Test = () => {
                         </div>
                     )}
                 </div>
-                {/* add question button */}
+                {/* submit button */}
                 <div className="text-left">
-                        <button className="btn btn-success p-3 text-white" 
-                        // onClick={submitForm}
-                        >
-                            Submit 
-                        </button>
-                    </div>
-                
+                    <button className="btn btn-success p-3 text-white"
+                        onClick={submitForm}
+                    >
+                        Submit
+                    </button>
+                </div>
+
             </div>
         </StudentDashboardLayout>
     );
@@ -116,10 +129,12 @@ export default Test;
 /*
 anwers: [
     {
+       marks: question.marks,
+        correct: answer.correct,
+        chosen: false,
+        testId: Number(id),
         questionId: answer.QuestionId,
-        answerId: answer.id,
-        correct,
-        marked: false
+        answerId: answer.id
     }
 ]
 */

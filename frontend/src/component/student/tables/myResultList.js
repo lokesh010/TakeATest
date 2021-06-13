@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const tableColumns = ['S.N', 'Name', 'Description', 'Pass Marks', 'Total Marks', 'Actions'];
+const tableColumns = ['S.N', 'Test Name', 'Participate Count', 'Participate Date','Pass Marks', 'Total Marks', 'Actions'];
 
-export default React.memo(({ testList }) => {
+export default React.memo(({ resultList }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -27,8 +27,8 @@ export default React.memo(({ testList }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {testList.length ?
-                                    testList.map((test, i) =>
+                                {resultList.length ?
+                                    resultList.map((test, i) =>
                                         <tr key={i}>
                                             <td>{i + 1}</td>
                                             <td className="txt-oflo">{test.name}</td>

@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const Questions = require('./Questions');
 
 module.exports = (sequelize) => {
   const Answers = sequelize.define('Answers', {
@@ -28,9 +29,6 @@ module.exports = (sequelize) => {
         key: "id"
       }
     }
-  }, {
-    // soft delete
-    paranoid: true
   });
 
   Answers.associate = models => {

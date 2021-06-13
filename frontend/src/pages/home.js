@@ -94,7 +94,7 @@ export default () =>
             </div>
         </section>
 
-        <footer classNAme="my-4">
+        <footer className="my-4">
             <p className="copyright justify-content-center text-center">Copyright &copy; 2020 TakeATest</p>
         </footer>
     </PageLayout>

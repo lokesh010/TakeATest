@@ -193,7 +193,7 @@ export default () => {
                             {/* questions accordion */}
                             <div id="accordion">
                                 {questions.length && questions.map((question, i) =>
-                                    <div className="card shadow">
+                                    <div className="card shadow" key={i}>
                                         {/* Accordion header */}
                                         <div className="card-header bg-dark text-white btn text-left" id="headingOne" data-target={`#${i}`} data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
                                             <h5 className="my-2 p-2">
@@ -219,7 +219,7 @@ export default () => {
                                                 <div className="d-flex my-3">
                                                     {/* map answers */}
                                                     {question.answers.map((answer, i2) =>
-                                                        <div className="w-25">
+                                                        <div className="w-25" key={i2}>
                                                             {/* checkbox */}
                                                             <span className="mr-2">Correct</span>
                                                             <input type="checkbox"

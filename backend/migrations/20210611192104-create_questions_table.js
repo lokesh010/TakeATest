@@ -31,6 +31,7 @@ module.exports = {
         }
       },
       // Timestamps
+      deletedAt: DataTypes.DATE,
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });

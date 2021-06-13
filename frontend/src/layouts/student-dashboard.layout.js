@@ -48,7 +48,7 @@ function DashboardLayout({ title, children, history }) {
                         <ul id="sidebarnav">
                             {/* dashboard */}
                             <li className="sidebar-item pt-2">
-                                <Link to='dashboard'>
+                                <Link to='/student/dashboard'>
                                     <div className="sidebar-link waves-effect waves-dark sidebar-link"
                                         aria-expanded="false">
                                         <i className="far fa-clock" aria-hidden="true"></i>
@@ -58,7 +58,7 @@ function DashboardLayout({ title, children, history }) {
                             </li>
                             {/* profile */}
                             <li className="sidebar-item">
-                                <Link to='myprofile'>
+                                <Link to='/student/myprofile'>
                                     <div className="sidebar-link waves-effect waves-dark sidebar-link"
                                         aria-expanded="false">
                                         <i className="fa fa-user" aria-hidden="true"></i>
@@ -68,7 +68,7 @@ function DashboardLayout({ title, children, history }) {
                             </li>
                             {/* test */}
                             <li className="sidebar-item">
-                                <Link to='test'>
+                                <Link to='/student/test'>
                                     <div className="sidebar-link waves-effect waves-dark sidebar-link"
                                         aria-expanded="false">
                                         <i className="fa fa-table" aria-hidden="true"></i>
@@ -78,7 +78,7 @@ function DashboardLayout({ title, children, history }) {
                             </li>
                             {/* result */}
                             <li className="sidebar-item">
-                                <Link to='results'>
+                                <Link to='/student/results'>
                                     <div className="sidebar-link waves-effect waves-dark sidebar-link"
                                         aria-expanded="false">
                                         <i className="fa fa-font" aria-hidden="true"></i>

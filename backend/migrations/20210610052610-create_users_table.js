@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,45 +12,45 @@ module.exports = {
       },
       fullName:
       {
-          type: DataTypes.STRING,
-          field: 'full_name',
-          allowNull: false,
+        type: DataTypes.STRING,
+        field: 'full_name',
+        allowNull: false,
 
       },
       phone:
       {
-          type: DataTypes.BIGINT,
-          unique: true
+        type: DataTypes.BIGINT,
+        unique: true
       },
       email:
-      {      
-          type: DataTypes.STRING,
-          unique: true,
-          allowNull: false
+      {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false
       },
       password:
-      {      
-          type: DataTypes.STRING,
-          allowNull: false
+      {
+        type: DataTypes.STRING,
+        allowNull: false
       },
       address:
-      {      
+      {
         type: DataTypes.STRING,
         allowNull: true
       },
-      role:{
-          type: DataTypes.ENUM('admin', 'student'),
-          allowNull: false
+      role: {
+        type: DataTypes.ENUM('admin', 'student'),
+        allowNull: false
       },
-
-        // Timestamps
-        createdAt: Sequelize.DATE,
-        updatedAt: Sequelize.DATE,
-     });
+      // Timestamps
+      deletedAt: DataTypes.DATE,
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE,
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
-      await queryInterface.dropTable('users')
-     
+    await queryInterface.dropTable('Users')
+
   }
 };

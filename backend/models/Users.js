@@ -35,6 +35,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
 
+    }, {
+        // soft delete
+        paranoid: true
     });
     return Users;
 };
