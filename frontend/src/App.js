@@ -4,11 +4,12 @@ import AdminRoutes from './component/private/AdminRoutes'
 import StudentRoutes from './component/private/StudentRoutes'
 import AuthRoutes from './component/private/AuthRoutes'
 // component
-import Profile from "./component/profile";
 import Protected from "./component/private/Protected";
-import Question from "./component/admin/question";
-import HomeAdmin from "./component/admin";
-import Test from "./component/admin/test";
+import Profile from "./component/profile";
+import TestResults from "./containers/admin/testResults";
+import Question from "./containers/admin/question";
+import HomeAdmin from "./containers/admin";
+import Test from "./containers/admin/testList";
 import HomeStudent from "./component/student";
 import TestList from "./component/student/testList";
 import TakeTest from "./component/student/takeTest";
@@ -19,6 +20,9 @@ import SignUP from "./pages/SignUp";
 import StudentSignin from "./pages/StudentSignIn";
 import AdminSignin from "./pages/AdminSignIn";
 import Home from "./pages/home";
+import Page404 from "./pages/Page404";
+// action
+import { isAuth } from "./action/authAction";
 
 function App() {
   return (
@@ -41,12 +45,18 @@ function App() {
           <AdminRoutes path="/admin/dashboard" exact>
             <HomeAdmin />
           </AdminRoutes>
-          <AdminRoutes path="/admin/test">
+          <AdminRoutes path="/admin/test" exact>
             <Test />
           </AdminRoutes>
           <AdminRoutes path="/admin/question">
             <Question />
           </AdminRoutes>
+          <AdminRoutes path="/admin/test/results">
+            <TestResults />
+          </AdminRoutes>
+          <AuthRoutes path="/admin/user/:UserId/test/:TestId/take/:take_count" exact>
+            <CheckTestAnswers role={isAuth() && isAuth().role} />
+          </AuthRoutes>
           {/* student protected routes */}
           <StudentRoutes path="/student/dashboard" exact>
             <HomeStudent />
@@ -61,11 +71,10 @@ function App() {
             <MyResults />
           </StudentRoutes>
           <StudentRoutes path="/student/test/:TestId/take/:take_count" exact>
-            <CheckTestAnswers />
+            <CheckTestAnswers role={isAuth() && isAuth().role}/>
           </StudentRoutes>
-
           {/* 404 */}
-          {/* <Route path="/*" component={HomeStudent} exact /> */}
+          <Route path="/*" component={Page404} exact />
         </Switch>
       </Router>
     </div>

@@ -17,7 +17,6 @@ const StudentHome = () => {
 
   return (
     <StudentDashboardLayout title={"Dashboard"}>
-
       {/* Container fluid  */}
       <div className="container-fluid">
         {/*  Three charts */}

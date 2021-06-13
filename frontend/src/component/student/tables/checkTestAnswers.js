@@ -4,20 +4,23 @@ import { Modal, Button } from 'react-bootstrap'
 // layout
 import StudentDashboardLayout from '../../../layouts/student-dashboard.layout'
 // action
-import { getMyTestAnswers } from '../../../action/resultsAction'
+import { getMyTestAnswers, getUserTestAnswers } from '../../../action/resultsAction'
 
-const CheckTestAnswers = () => {
-    const { TestId, take_count } = useParams();
-    // model
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+const CheckTestAnswers = ({role}) => {
+    const { UserId, TestId, take_count } = useParams();
 
     const [testAnswers, setTestAnswers] = useState([]);
     const [uniqueQuestions, setUniqueQuestions] = useState([]);
 
     useEffect(async () => {
-        const testAnswers = await getMyTestAnswers(TestId, take_count);
+        let testAnswers = [];
+
+        if(role === 'admin'){
+            testAnswers = await getUserTestAnswers(UserId, TestId, take_count);
+        }else {
+            testAnswers = await getMyTestAnswers(TestId, take_count);
+
+        }
         setTestAnswers(testAnswers);
 
         // unique Questions
@@ -80,7 +83,7 @@ const CheckTestAnswers = () => {
                     )}
                 </div>
                     {/* go back button */}
-                <Link to={`/student/results`}>
+                <Link to={role==='admin'? `/admin/test/results`: `/student/results`}>
                     <div className="text-left">
                         <button className="btn btn-primary p-3 text-white">
                             Go Back

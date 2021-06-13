@@ -17,7 +17,6 @@ const Test = () => {
 
     return (
         <StudentDashboardLayout title={"My Results"}>
-            {/* Container fluid  */}
             <div className="container-fluid">
                 <MyResults resultList={results}/>
             </div>

@@ -26,7 +26,7 @@ export default React.memo(({ testList, deleteHandler }) =>
                                         <td>{test.description}</td>
                                         <td className="text-info">{test.passMarks}</td>
                                         <td><span className="text-success">{test.totalMarks}</span></td>
-                                        <td><button className="btn btn-danger" onClick={() => deleteHandler(test.id)}>Delete</button></td>
+                                        <td><button className="btn btn-danger text-white" onClick={() => deleteHandler(test.id)}>Delete</button></td>
                                     </tr>
                                 )
                                 : <tr className="mt-4"><td>No data available</td></tr>

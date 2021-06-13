@@ -16,12 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER(3),
       allowNull: false,
     },
-    passMarks:
-    {
-      type: DataTypes.INTEGER(3),
-      field: 'pass_marks',
-      allowNull: false,
-    },
     correct:
     {
       type: DataTypes.BOOLEAN,

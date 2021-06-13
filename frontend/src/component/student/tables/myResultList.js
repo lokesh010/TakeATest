@@ -40,7 +40,7 @@ export default React.memo(({ resultList }) =>
                                             <td><span>{test.Test.passMarks}</span></td>
                                             <td><span>{test.Test.totalMarks}</span></td>
                                             <td>
-                                            <Link to={`/student/test/${test.TestId}/take/${test.take_count}`}>
+                                            <Link to={`/test/${test.TestId}/take/${test.take_count}`}>
                                                 <Button variant="primary">
                                                     Check Answers
                                                 </Button>

@@ -52,7 +52,7 @@ exports.questionsByTest = async (req, res) => {
   } catch (err) {
     console.log({ err })
     return res.status(400).json({
-      error: "Error gettins questions by test",
+      error: "Error getting questions by test",
     });
   }
 }

@@ -8,7 +8,7 @@ import "../assets/dashboard/css/style.min.css"
 
 import logo from '../assets/homepage/images/logo.png'
 import { signout } from '../action/authAction'
-import { withRouter, Route, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 function DashboardLayout({ title, children, history }) {
     return (
@@ -88,31 +88,13 @@ function DashboardLayout({ title, children, history }) {
                             </li>
                             {/* result */}
                             <li className="sidebar-item">
-                                <Link to='/admin/results'>
+                                <Link to='/admin/test/results'>
                                     <div className="sidebar-link waves-effect waves-dark sidebar-link"
                                         aria-expanded="false">
                                         <i className="fa fa-font" aria-hidden="true"></i>
                                         <span className="hide-menu">Results</span>
                                     </div>
                                 </Link>
-                            </li>
-                            {/* users */}
-                            <li className="sidebar-item">
-                                <Link to='/admin/users'>
-                                    <div className="sidebar-link waves-effect waves-dark sidebar-link"
-                                        aria-expanded="false">
-                                        <i className="fa fa-globe" aria-hidden="true"></i>
-                                        <span className="hide-menu">Users</span>
-                                    </div>
-                                </Link>
-
-                            </li>
-                            <li className="sidebar-item">
-                                <a className="sidebar-link waves-effect waves-dark sidebar-link" href="404"
-                                    aria-expanded="false">
-                                    <i className="fa fa-info-circle" aria-hidden="true"></i>
-                                    <span className="hide-menu">Error 404</span>
-                                </a>
                             </li>
                         </ul>
 
@@ -136,7 +118,10 @@ function DashboardLayout({ title, children, history }) {
                         </div>
                     </div>
                 </div>
-                {children}
+                {/* dynamic component */}
+                <div className="container-fluid">
+                    {children}
+                </div>
                 {/* footer */}
                 <footer className="footer text-center"> TakeATest </footer>
             </div>

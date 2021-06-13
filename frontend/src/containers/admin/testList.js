@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 // layout
 import AdminDashboardLayout from '../../layouts/admin-dashboard.layout'
 // components
-import TestCreateForm from './forms/test.create'
-import TestList from './tables/testList'
+import TestCreateForm from '../../component/admin/forms/test.create'
+import TestList from '../../component/admin/tables/testList'
 // action
 import { create, read, destroy } from '../../action/testAction'
 
-const Test = () => {
+const Tests = () => {
     const [testList, setTestList] = useState([]);
     const [form, setForm] = useState({
         name: '',
@@ -23,7 +23,7 @@ const Test = () => {
         })
 
     const submitForm = async (e) => {
-        if(form.passMarks > form.totalMarks){
+        if (form.passMarks > form.totalMarks) {
             return alert('Pass marks cannot be greater than total')
         }
 
@@ -33,16 +33,16 @@ const Test = () => {
         setForm({
             name: '',
             description: '',
-            totalMarks: 0,
-            passMarks: 0
+            totalMarks: null,
+            passMarks: null
         })
 
         setTestList([createdForm, ...testList]);
     }
 
-    const deleteHandler = async (id)=> {
+    const deleteHandler = async (id) => {
         await destroy(id);
-        setTestList(testList.filter(test=> test.id !== id));
+        setTestList(testList.filter(test => test.id !== id));
     }
 
     useEffect(async () => {
@@ -52,15 +52,19 @@ const Test = () => {
 
     return (
         <AdminDashboardLayout title={"Test"}>
-            {/* Container fluid  */}
-            <div className="container-fluid">
-                {/* create test */}
-                <TestCreateForm form={form} changeHandler={changeHandler} submitForm={submitForm} />
-                {/* All tests */}
-                <TestList testList={testList} deleteHandler={deleteHandler} />
-            </div>
+            {/* create test */}
+            <TestCreateForm
+                form={form}
+                changeHandler={changeHandler}
+                submitForm={submitForm}
+            />
+            {/* All tests */}
+            <TestList
+                testList={testList}
+                deleteHandler={deleteHandler}
+            />
         </AdminDashboardLayout>
     );
 };
 
-export default Test;
+export default Tests;

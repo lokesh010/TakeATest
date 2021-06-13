@@ -97,6 +97,7 @@ export default () => {
         
         )
     }
+    
     function checkRoleDashboard(){
         if(user.role === "admin"){
             return <AdminDashboardLayout title={"My Profile"}>{profile()}</AdminDashboardLayout>

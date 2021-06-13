@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { create, getMyResult, getMyTestAnswers,
-  // getAll, getByUser
+  getAll, getUserTestAnswers
  } = require("../controllers/resultsControllers");
 const {
   authMiddleware,
@@ -9,7 +9,8 @@ const {
 } = require("../controllers/authControllers");
 
 // get by admin
-// router.get("/", adminMiddleware, getAll);
+router.get("/", adminMiddleware, getAll);
+router.get("/user/:UserId/test/:TestId/take/:take_count", adminMiddleware, getUserTestAnswers);
 // router.get("/:userId", adminMiddleware, getByUser);
 
 // create by students after taking test

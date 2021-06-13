@@ -9,20 +9,24 @@ const SignUpComponet = ({ history }) => {
     address: "",
     email: "",
     password: "",
+    cpassword: "",
     error: "",
     loading: false,
     message: "",
     showForm: true,
   });
 
-  const { fullName, phone, address, email, password, error, loading, message, showForm } = values;
+  const { fullName, phone, address, email, password, cpassword, error, loading, message, showForm } = values;
   useEffect(() => {
     isAuth() && history.push("/");
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.table({ fullName, email, password, error, loading, message, showForm });
+
+    if (password !== cpassword) {
+      return setValues({ ...values, error: "password and confirm password don't match" })
+    }
 
     setValues({ ...values, loading: true, error: false });
     const user = { fullName, email, password, phone, address };
@@ -57,7 +61,7 @@ const SignUpComponet = ({ history }) => {
   };
 
   const handleChange = (name) => (e) => {
-    setValues({ ...values, error: false, [name]:  e.target.value });
+    setValues({ ...values, error: false, [name]: e.target.value });
   };
 
   const showLoading = () =>
@@ -77,7 +81,7 @@ const SignUpComponet = ({ history }) => {
               onChange={handleChange("fullName")}
               type="text"
               className="form-control"
-              placeholder="Type your Full Name"
+              placeholder="Enter Full Name"
             />
             <br />
 
@@ -86,7 +90,7 @@ const SignUpComponet = ({ history }) => {
               onChange={handleChange("phone")}
               type="number"
               className="form-control"
-              placeholder="Type your phone"
+              placeholder="Enter phone"
             />
             <br />
 
@@ -95,7 +99,7 @@ const SignUpComponet = ({ history }) => {
               onChange={handleChange("address")}
               type="text"
               className="form-control"
-              placeholder="Type your adress"
+              placeholder="Enter adress"
             />
             <br />
 
@@ -104,7 +108,7 @@ const SignUpComponet = ({ history }) => {
               onChange={handleChange("email")}
               type="email"
               className="form-control"
-              placeholder="Type your email"
+              placeholder="Enter email"
             />
             <br />
 
@@ -113,7 +117,16 @@ const SignUpComponet = ({ history }) => {
               onChange={handleChange("password")}
               type="password"
               className="form-control"
-              placeholder="Type your password"
+              placeholder="Enter password"
+            />
+            <br />
+
+            <input
+              value={cpassword}
+              onChange={handleChange("cpassword")}
+              type="password"
+              className="form-control"
+              placeholder="Confirm password"
             />
           </div>
           <button type="submit" className="btn btn-primary">
