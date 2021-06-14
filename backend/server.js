@@ -13,6 +13,7 @@ const apiRoutes = require("./routes");
 
 //app
 const app = express();
+app.use(cors());
 
 //database connect
 db.myql_connect()
@@ -24,11 +25,12 @@ app.use(bodyParser.json())
 app.use(cookieParser());
 
 //allow cors on development
-if (process.env.NODE_ENV == "development") {
+// if (process.env.NODE_ENV == "development") {
 
-  app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
+//   app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 
-} else if (process.env.NODE_ENV === 'production') {
+// }
+  if (process.env.NODE_ENV === 'production') {
   // Serve a static assets if in productions
   // Set a static folder
   app.use(express.static(path.join(__dirname, "../frontend/build")))

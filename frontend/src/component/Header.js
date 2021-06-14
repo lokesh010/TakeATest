@@ -50,6 +50,7 @@ const Header = ({ history }) => {
             </NavItem>
             </Nav>
            :
+           isAuth() && isAuth().role === 'student'?
            <Nav>
             <NavItem>
               <Link to="/student/dashboard">
@@ -57,6 +58,7 @@ const Header = ({ history }) => {
               </Link>
             </NavItem>
         </Nav>
+        :null
           }
         {/* right nav */}
         <Collapse isOpen={isOpen} navbar>
