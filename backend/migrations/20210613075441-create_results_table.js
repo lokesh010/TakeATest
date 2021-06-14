@@ -67,6 +67,7 @@ module.exports = {
           model: "Users",
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       // Timestamps
       createdAt: Sequelize.DATE,

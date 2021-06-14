@@ -2,7 +2,6 @@ const { Op } = require("sequelize");
 const { Users } = require("../models");
 const { hash, compare } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const expressJwt = require("express-jwt");
 
 // student signup
 exports.signup = async (req, res) => {
@@ -28,7 +27,7 @@ exports.signup = async (req, res) => {
 
 
 };
-// student signup
+// admin register
 exports.registerAdmin = async (req, res) => {
 
   const findDuplicate = await Users.findOne({ where: { email: req.body.email } });
@@ -79,16 +78,11 @@ exports.signout = (req, res) => {
   });
 };
 
-exports.requireSignin = expressJwt({
-  secret: process.env.JWT_SECRET,
-  algorithms: ["HS256"],
-});
-
 // Middlewares
-exports.authMiddleware = async (req, res, next) => {  
-  const tokenpayload = getTokenUser(req,res);
+exports.authMiddleware = async (req, res, next) => {
+  const tokenpayload = getTokenUser(req, res);
 
-  if(!tokenpayload){
+  if (!tokenpayload) {
     return res.status(400).json({
       error: "Access denied",
     });
@@ -97,7 +91,7 @@ exports.authMiddleware = async (req, res, next) => {
   const user = await Users.findByPk(tokenpayload.id);
   req.user = tokenpayload;
 
-  if (!user){
+  if (!user) {
     return res.status(400).json({
       error: "Private resource Access denied",
     });
@@ -106,9 +100,9 @@ exports.authMiddleware = async (req, res, next) => {
 };
 
 exports.adminMiddleware = async (req, res, next) => {
-  const tokenpayload = getTokenUser(req,res);
+  const tokenpayload = getTokenUser(req, res);
 
-  if(!tokenpayload){
+  if (!tokenpayload) {
     return res.status(400).json({
       error: "Access denied",
     });
@@ -116,7 +110,7 @@ exports.adminMiddleware = async (req, res, next) => {
 
   const user = await Users.findByPk(tokenpayload.id);
 
-  if (!user || user.role !== 'admin'){
+  if (!user || user.role !== 'admin') {
     return res.status(400).json({
       error: "Admin resource Access denied",
     });
@@ -151,7 +145,7 @@ async function createJWT(findUser, password, res) {
   });
 }
 
-function getTokenUser(req,res){
+function getTokenUser(req, res) {
   const rawToken = req.headers['set-cookie'][0];
 
   return jwt.decode(rawToken);

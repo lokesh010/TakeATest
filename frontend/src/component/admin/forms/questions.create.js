@@ -33,7 +33,7 @@ export default React.memo((
                             )}>
                             {testList.length &&
                                 testList.map(test =>
-                                    <option value={test.id}>{test.name}</option>
+                                    <option key={test.id} value={test.id}>{test.name}</option>
                                 )
                             }
                         </select>

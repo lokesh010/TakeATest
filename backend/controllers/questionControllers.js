@@ -7,22 +7,22 @@ DTO {
  }
 */
 exports.createWithAnswers = async (req, res) => {
-  
-  const {testId, questions} = req.body;
 
-  try{
+  const { testId, questions } = req.body;
+
+  try {
     // create questions
     questions.forEach(async questionObj => {
-      const {answers, ...restQuestion} = questionObj;
-      const createdQuestion = await Questions.create({TestId: testId,...restQuestion});
+      const { answers, ...restQuestion } = questionObj;
+      const createdQuestion = await Questions.create({ TestId: testId, ...restQuestion });
       // create answers
       answers.forEach(async answerObj => {
-        await Answers.create({QuestionId: createdQuestion.id,...answerObj});
+        await Answers.create({ QuestionId: createdQuestion.id, ...answerObj });
       });
     });
 
     return res.sendStatus(200);
-  }catch(err){
+  } catch (err) {
     console.log(err)
     return res.status(400).json({
       error: "Error when creating a test",
@@ -31,11 +31,11 @@ exports.createWithAnswers = async (req, res) => {
 }
 
 exports.read = async (req, res) => {
-  try{
-    const testList = await Questions.findAll({order: ['createdAt']}); 
+  try {
+    const testList = await Questions.findAll({ order: ['createdAt'] });
 
     return res.json(testList);
-  }catch(err){
+  } catch (err) {
     return res.status(400).json({
       error: "Error getting tests",
     });
@@ -43,11 +43,11 @@ exports.read = async (req, res) => {
 }
 
 exports.destroy = async (req, res) => {
-  try{
-    const deletedTest = await Tests.destroy({where: {id: req.params.id}}); 
+  try {
+    const deletedTest = await Tests.destroy({ where: { id: req.params.id } });
 
     return res.json(deletedTest);
-  }catch(err){
+  } catch (err) {
     return res.status(400).json({
       error: "Error deleting test",
     });

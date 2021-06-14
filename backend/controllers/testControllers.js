@@ -43,7 +43,7 @@ exports.questionsByTest = async (req, res) => {
         TestId: req.params.id
       },
       include: [
-        { model: Answers },
+        { model: Answers, aggregate:['id','answer'] },
       ]
     });
     

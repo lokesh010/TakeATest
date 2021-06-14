@@ -2,24 +2,24 @@ const { Results, Tests, sequelize, Questions, Answers, Users } = require("../mod
 
 // Admin Routes
 exports.getAll = async (req, res) => {
-  
+
   try {
     const results = await Results.findAll({
       // where selected correct answers
-      where: {correct: true, chosen: true},
-      
-      group: ['UserId','TestId', 'take_count'],
+      where: { correct: true, chosen: true },
+
+      group: ['UserId', 'TestId', 'take_count'],
 
       include: [
-        {model: Tests, attributes: ['id', 'name', 'passMarks', 'totalMarks'] },
-        {model: Users, attributes: ['id', 'fullName'] }
+        { model: Tests, attributes: ['id', 'name', 'passMarks', 'totalMarks'], paranoid: false },
+        { model: Users, attributes: ['id', 'fullName'] }
       ],
-      
-      attributes:[
-        'UserId','TestId', 'take_count',
-      [sequelize.fn('sum',sequelize.col('marks')), 'obtainedMarks'] // total correct marks
-    ],
-    order: [['createdAt']],
+
+      attributes: [
+        'UserId', 'TestId', 'take_count',
+        [sequelize.fn('sum', sequelize.col('marks')), 'obtainedMarks'] // total correct marks
+      ],
+      order: [['createdAt']],
     })
 
     return res.json(results);
@@ -69,7 +69,7 @@ exports.create = async (req, res) => {
     req.body.forEach(async result => {
       await Results.create({
         UserId: req.user.id,
-        take_count: Number(maxTestCount) + 1,
+        take_count: isNaN(maxTestCount) ? 1 : Number(maxTestCount) + 1,
         passMarks: findTest.passMarks,
         ...result
       })
@@ -97,7 +97,7 @@ exports.getMyResult = async (req, res) => {
         [sequelize.fn('sum', sequelize.col('marks')), 'obtainedMarks'], // total correct marks (correct marks by where)
       ],
       include: [
-        { model: Tests, attributes: ['id', 'name', 'passMarks', 'totalMarks'] },
+        { model: Tests, attributes: ['id', 'name', 'passMarks', 'totalMarks'], paranoid: false },
       ],
       order: ['TestId', ['take_count', 'DESC']],
     });

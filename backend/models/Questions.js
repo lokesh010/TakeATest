@@ -37,9 +37,7 @@ module.exports = (sequelize) => {
             foreignKey: 'id',
             sourceKey: 'TestId'
         });
-    };
 
-    Questions.associate = models => {
         Questions.hasMany(models.Answers, {
             foreignKey: 'QuestionId',
             sourceKey: 'id'

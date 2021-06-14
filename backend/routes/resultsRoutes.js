@@ -8,12 +8,11 @@ const {
   adminMiddleware
 } = require("../controllers/authControllers");
 
-// get by admin
+// by admin
 router.get("/", adminMiddleware, getAll);
 router.get("/user/:UserId/test/:TestId/take/:take_count", adminMiddleware, getUserTestAnswers);
-// router.get("/:userId", adminMiddleware, getByUser);
 
-// create by students after taking test
+// by students
 router.post("/", authMiddleware, create);
 router.get("/my-results", authMiddleware, getMyResult);
 router.get("/test/:TestId/take/:take_count", authMiddleware, getMyTestAnswers);

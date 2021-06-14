@@ -23,27 +23,3 @@ module.exports = {
     "dialect": "mysql"
   }
 }
-
-// {
-//   "development": {
-//     "username": "asura",
-//     "password": "rootroot",
-//     "database": "takeatest",
-//     "host": "127.0.0.1",
-//     "dialect": "mysql"
-//   },
-//   "test": {
-//     "username": "asura",
-//     "password": "rootroot",
-//     "database": "takeatest",
-//     "host": "127.0.0.1",
-//     "dialect": "mysql"
-//   },
-//   "production": {
-//     "username": "asura",
-//     "password": "rootroot",
-//     "database": "takeatest",
-//     "host": "127.0.0.1",
-//     "dialect": "mysql"
-//   }
-// }

@@ -47,11 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'TestId',
       sourceKey: 'id'
     });
-
-    Tests.hasMany(models.Answers, {
-      foreignKey: 'TestId',
-      sourceKey: 'id'
-    });
   };
 
   return Tests;

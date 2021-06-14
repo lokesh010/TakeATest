@@ -30,12 +30,7 @@ export default () => {
   return (
     <AdminDashboardLayout title={"Dashboard"}>
       {/* Cards */}
-      <DashboardCards
-        totalAdmin={cardValues.totalAdmin}
-        totalTests={cardValues.totalTests}
-        totalStudents={cardValues.totalStudents}
-        countTestTakenStudents={cardValues.countTestTakenStudents}
-      />
+      <DashboardCards cardValues={cardValues} />
       {/* All Results */}
       <ResultList testResults={testResults} />
     </AdminDashboardLayout>

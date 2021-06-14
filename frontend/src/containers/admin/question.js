@@ -9,7 +9,7 @@ import { create } from '../../action/questionAction'
 
 const initialQuestionModel = {
     question: "",
-    marks: null,
+    marks: '',
     answers: [
         {
             answer: "",

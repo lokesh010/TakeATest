@@ -12,8 +12,8 @@ const Tests = () => {
     const [form, setForm] = useState({
         name: '',
         description: '',
-        totalMarks: null,
-        passMarks: null
+        totalMarks: '',
+        passMarks: ''
     })
 
     const changeHandler = ({ target: { name, value } }) =>
@@ -33,8 +33,8 @@ const Tests = () => {
         setForm({
             name: '',
             description: '',
-            totalMarks: null,
-            passMarks: null
+            totalMarks: '',
+            passMarks: ''
         })
 
         setTestList([createdForm, ...testList]);

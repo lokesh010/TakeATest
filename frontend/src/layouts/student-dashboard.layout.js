@@ -108,7 +108,9 @@ function DashboardLayout({ title, children, history }) {
                         </div>
                     </div>
                 </div>
+                <div className="container-fluid">
                 {children}
+                </div>
                 {/* footer */}
                 <footer className="footer text-center">TakeATest</footer>
             </div>

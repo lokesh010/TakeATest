@@ -28,7 +28,8 @@ module.exports = {
         references: {
           model: "Tests",
           key: "id"
-        }
+        },
+        onDelete: 'CASCADE'
       },
       // Timestamps
       deletedAt: DataTypes.DATE,

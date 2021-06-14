@@ -53,7 +53,7 @@ const SigninComponent = ({ history, role }) => {
     setValues({ ...values, error: false, [name]: e.target.value });
   };
 
-  const showLaoding = () =>
+  const showLoading = () =>
     loading ? <div className="alert alert-info">Loading...</div> : "";
   const showError = () =>
     error ? <div className="alert alert-danger">{error}</div> : "";
@@ -90,7 +90,7 @@ const SigninComponent = ({ history, role }) => {
 
   return (
     <div className="container">
-      {showLaoding()}
+      {showLoading()}
       {showError()}
       {showMessage()}
       {showForm && signinForm()}

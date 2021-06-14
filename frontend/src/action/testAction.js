@@ -1,6 +1,5 @@
 import fetch from "./fetch";
 import { API } from "../config/config";
-import cookie from "js-cookie";
 
 export const create = (test) => {
   return fetch(`${API}/test`, {

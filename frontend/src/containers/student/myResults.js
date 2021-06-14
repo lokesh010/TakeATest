@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // layout
 import StudentDashboardLayout from '../../layouts/student-dashboard.layout'
 // component
-import MyResults from './tables/myResultList'
+import MyResults from '../../component/student/tables/myResultList'
 // action
 import { getMyResult } from '../../action/resultsAction'
 
@@ -17,9 +17,7 @@ const Test = () => {
 
     return (
         <StudentDashboardLayout title={"My Results"}>
-            <div className="container-fluid">
                 <MyResults resultList={results}/>
-            </div>
         </StudentDashboardLayout>
     );
 };

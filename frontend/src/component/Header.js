@@ -20,33 +20,47 @@ const Header = ({ history }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
+        {/* Logo */}
         <Link to="/">
           <NavbarBrand
             style={{ cursor: "pointer" }}
             className="font-weight-bold"
           >
-            <img src={logo} height="60"/>
+            <img src={logo} height="60" />
           </NavbarBrand>
         </Link>
         <NavbarToggler onClick={toggle} />
-        
+        {/* Home */}
         <Nav className="ml-auto" navbar>
-            {!isAuth() && (
-              <React.Fragment>
-                <NavItem>
-                  <Link to="/">
-                    <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Home</NavLink>
-                  </Link>
-                </NavItem>
-              </React.Fragment>
-            )}
-
-          </Nav>
+          {!isAuth() && (
+            <NavItem>
+              <Link to="/">
+                <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Home</NavLink>
+              </Link>
+            </NavItem>
+          )}
+        </Nav>
+      {/* Dashboard link */}
+        <Nav className="ml-auto" navbar>
+          {isAuth() && isAuth().role === 'admin' ? 
+            <NavItem>
+              <Link to="/admin/dashboard">
+                <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Dashboard</NavLink>
+              </Link>
+            </NavItem>
+           :
+            <NavItem>
+              <Link to="/student/dashboard">
+                <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Dashboard</NavLink>
+              </Link>
+            </NavItem>
+          }
+        </Nav>
         {/* right nav */}
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {!isAuth() && (
-              <React.Fragment>
+              <>
                 <NavItem>
                   <Link to="/signup">
                     <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Register</NavLink>
@@ -62,19 +76,9 @@ const Header = ({ history }) => {
                     <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Admin Login</NavLink>
                   </Link>
                 </NavItem>
-              </React.Fragment>
+              </>
             )}
-
-            {isAuth() && isAuth().role === 0 && (
-              <NavItem>
-                <Link to="/user">
-                  <NavLink style={{ cursor: "pointer" }}>{`${
-                    isAuth().name
-                  }'s Dashboard`}</NavLink>
-                </Link>
-              </NavItem>
-            )}          
-
+            {/* Sign out */}
             {isAuth() && (
               <NavItem>
                 <NavLink

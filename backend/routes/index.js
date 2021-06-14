@@ -9,7 +9,7 @@ const dashboardRoutes = require("./dashboardRoutes");
 
 //routes
 
-router.get("/status", (req,res)=> res.json("API Connected!"));
+router.get("/status", (req, res) => res.json("API Connected!"));
 
 router.use("/dashboard", dashboardRoutes);
 

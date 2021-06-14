@@ -5,7 +5,6 @@ const {
   adminSignin,
   signup,
   signout,
-  requireSignin,
 } = require("../controllers/authControllers");
 
 //import validator
@@ -20,12 +19,5 @@ route.post("/signup", userSignupValidator, runValidation, signup);
 route.post("/student/signin", userSigninValidator, runValidation, studentSignin);
 route.post("/admin/signin", userSigninValidator, runValidation, adminSignin);
 route.get("/signout", signout);
-
-// test
-route.get("/secret", requireSignin, (req, res) => {
-  res.json({
-    user: req.user,
-  });
-});
 
 module.exports = route;

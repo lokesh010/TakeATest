@@ -13,25 +13,25 @@ export default React.memo(({ form, changeHandler, submitForm }) =>
                 <div className="form-group row">
                     {/* name */}
                     <div className="col-sm-12 col-md-6 mt-3">
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input className="form-control" placeholder="Enter Name" type="text" required
                             name="name" value={form.name} onChange={changeHandler} />
                     </div>
                     {/* description */}
                     <div className="col-sm-12 col-md-6 mt-3">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <input name="description" className="form-control" placeholder="Enter Description" type="text"
                             value={form.description} onChange={changeHandler} />
                     </div>
                     {/* total marks */}
                     <div className="col-sm-12 col-md-6 mt-3">
-                        <label for="totalMarks">Total Marks</label>
+                        <label htmlFor="totalMarks">Total Marks</label>
                         <input name="totalMarks" type="number" className="form-control" placeholder="Enter Total Marks" required
                             value={form.totalMarks} onChange={changeHandler} />
                     </div>
                     {/* pass marks */}
                     <div className="col-sm-12 col-md-6 mt-3">
-                        <label for="passMarks">Pass Marks</label>
+                        <label htmlFor="passMarks">Pass Marks</label>
                         <input name="passMarks" type="number" className="form-control" placeholder="Enter Pass Marks" required
                             value={form.passMarks} onChange={changeHandler} />
                     </div>

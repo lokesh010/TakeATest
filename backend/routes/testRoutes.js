@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
+
+//import validator
+const { runValidation } = require("../validators");
+const {
+  createTest
+} = require("../validators/testValidator");
+
 const { create, read, destroy, questionsByTest } = require("../controllers/testControllers");
 const {
-  requireSignin,
-  authMiddleware,
   adminMiddleware,
 } = require("../controllers/authControllers");
 
-router.post("/", adminMiddleware, create);
+router.post("/", createTest, runValidation, adminMiddleware, create);
 router.get("/", read);
 router.delete("/:id", adminMiddleware, destroy);
 // relations

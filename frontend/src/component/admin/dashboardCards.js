@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default React.memo(({ totalStudents = 0, totalAdmin = 1, totalTests = 0, countTestTakenStudents = 0 }) =>
+export default React.memo(({ cardValues }) =>
     <div className="row justify-content-center">
         {/* 1st card */}
         <div className="col-lg-3 col-md-6 col-sm-12">
@@ -12,7 +12,7 @@ export default React.memo(({ totalStudents = 0, totalAdmin = 1, totalTests = 0, 
                             style={{ "display": "inline-block", "width": "67px", "height": "30px", "verticalAlign": "top" }}></canvas>
                         </div>
                     </li>
-                    <li className="ms-auto"><span className="counter text-purple">{totalAdmin}</span></li>
+                    <li className="ms-auto"><span className="counter text-purple">{cardValues.totalAdmin}</span></li>
                 </ul>
             </div>
         </div>
@@ -26,7 +26,7 @@ export default React.memo(({ totalStudents = 0, totalAdmin = 1, totalTests = 0, 
                             style={{ "display": "inline-block", "width": "67px", "height": "30px", "verticalAlign": "top" }}></canvas>
                         </div>
                     </li>
-                    <li className="ms-auto"><span className="counter text-info">{totalTests}</span>
+                    <li className="ms-auto"><span className="counter text-info">{cardValues.totalTests}</span>
                     </li>
                 </ul>
             </div>
@@ -41,11 +41,11 @@ export default React.memo(({ totalStudents = 0, totalAdmin = 1, totalTests = 0, 
                             style={{ "display": "inline-block", "width": "67px", "height": "30px", "verticalAlign": "top" }}></canvas>
                         </div>
                     </li>
-                    <li className="ms-auto"><span className="counter text-success">{totalStudents}</span></li>
+                    <li className="ms-auto"><span className="counter text-success">{cardValues.totalStudents}</span></li>
                 </ul>
             </div>
         </div>
-        {/* 3rd card */}
+        {/* 4th card */}
         <div className="col-lg-3 col-md-6 col-sm-12">
             <div className="white-box analytics-info">
                 <h3 className="box-title">Test Taken Students</h3>
@@ -55,7 +55,7 @@ export default React.memo(({ totalStudents = 0, totalAdmin = 1, totalTests = 0, 
                             style={{ "display": "inline-block", "width": "67px", "height": "30px", "verticalAlign": "top" }}></canvas>
                         </div>
                     </li>
-                    <li className="ms-auto"><span className="counter text-info">{countTestTakenStudents}</span>
+                    <li className="ms-auto"><span className="counter text-info">{cardValues.countTestTakenStudents}</span>
                     </li>
                 </ul>
             </div>

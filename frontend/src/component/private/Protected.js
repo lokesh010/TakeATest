@@ -3,9 +3,6 @@ import { withRouter } from "react-router-dom";
 import { isAuth } from "../../action/authAction";
 const Protected = ({ history }) => {
   useEffect(() => {
-    // if (!isAuth()) {
-    //   history.push("/home");
-    // } else 
     if (isAuth() && isAuth().role === 'admin') {
       history.push("/admin/dashboard");
     }
