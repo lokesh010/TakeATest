@@ -41,21 +41,23 @@ const Header = ({ history }) => {
           )}
         </Nav>
       {/* Dashboard link */}
-        <Nav className="ml-auto" navbar>
           {isAuth() && isAuth().role === 'admin' ? 
+        <Nav className="ml-auto" navbar>
             <NavItem>
               <Link to="/admin/dashboard">
                 <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Dashboard</NavLink>
               </Link>
             </NavItem>
+            </Nav>
            :
+           <Nav>
             <NavItem>
               <Link to="/student/dashboard">
                 <NavLink style={{ cursor: "pointer", fontSize: '1.2em' }}>Dashboard</NavLink>
               </Link>
             </NavItem>
-          }
         </Nav>
+          }
         {/* right nav */}
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

@@ -80,7 +80,9 @@ export default React.memo((
                                             value={question.marks} onChange={(e) => marksChangeHandler(e, i)}
                                         />
                                         <button className="btn btn-danger ml-auto text-white"
-                                            onClick={() => deleteQuestionHandler(i)}>Delete Question</button>
+                                            onClick={() => deleteQuestionHandler(i)}>
+                                            <i className="fas fa-trash"></i>
+                                        </button>
                                     </div>
                                     <hr />
                                     <div className="d-flex my-3">

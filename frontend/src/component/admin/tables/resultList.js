@@ -4,16 +4,26 @@ import { Link } from 'react-router-dom'
 
 const tableColumns = ['S.N', 'Test Name', 'Student Name', 'Take Count', 'Obtained Marks', 'Pass Marks', 'Total Marks', 'Actions'];
 
-export default React.memo(({ testResults }) =>
+export default React.memo(({ testResults, setFilter }) =>
+
     <div className="row">
         <div className="col-md-12 col-lg-12 col-sm-12">
             <div className="white-box">
-                <div className="d-md-flex mb-3">
-                    <h3 className="box-title mb-0">Test Results</h3>
+                <div className="d-md-flex mb-4">
+                    <h3 className="box-title mb-0">TestResults</h3>
+                    <select className="form-control w-25 ml-auto"
+                        defaultValue=''
+                        onChange={setFilter}
+                    >
+                        <option value="">All Results</option>
+                        <option value="passed">Passed Results</option>
+                        <option value="failed">Failed Results</option>
+                    </select>
                 </div>
+                {/* table */}
                 <div className="table-responsive">
                     <table className="table no-wrap">
-                        {/* table head */}
+                        {/* table headers */}
                         <thead>
                             <tr>
                                 {tableColumns.map((column, i) => <th className="border-top-0" key={i}>{column}</th>)}
@@ -38,7 +48,7 @@ export default React.memo(({ testResults }) =>
                                         <td>
                                             <Link to={`/admin/user/${test.UserId}/test/${test.TestId}/take/${test.take_count}`}>
                                                 <Button variant="primary">
-                                                    Check Answers
+                                                    <i className="fas fa-eye"></i>
                                                 </Button>
                                             </Link>
                                         </td>
@@ -53,4 +63,6 @@ export default React.memo(({ testResults }) =>
         </div>
     </div>
 )
+
+
 

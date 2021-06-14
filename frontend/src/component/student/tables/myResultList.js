@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import React from 'react'
+import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const tableColumns = ['S.N', 'Test Name', 'Test Taken Count', 'Status', 'Obtained Marks', 'Pass Marks', 'Total Marks', 'Actions'];
@@ -10,7 +10,7 @@ export default React.memo(({ resultList }) =>
             <div className="col-md-12 col-lg-12 col-sm-12">
                 <div className="white-box">
                     <div className="d-md-flex mb-3">
-                        <h3 className="box-title mb-0">All Tests</h3>
+                        <h3 className="box-title mb-0">All Results</h3>
                     </div>
                     {/* test list table */}
                     <div className="table-responsive">
@@ -42,7 +42,7 @@ export default React.memo(({ resultList }) =>
                                             <td>
                                             <Link to={`/student/test/${test.TestId}/take/${test.take_count}`}>
                                                 <Button variant="primary">
-                                                    Check Answers
+                                                    <i className="fas fa-eye"></i>
                                                 </Button>
                                                 </Link>
                                             </td>

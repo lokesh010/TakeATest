@@ -19,10 +19,13 @@ export default () => {
     countTestTakenStudents: 0
   });
 
+  const [filter, setFilter] = useState('');
+  const changeFilter = e => setFilter(e.target.value);
+
   useEffect(async () => {
     const getAdminCards = await getAdminDashboard();
     setCardValues(getAdminCards);
-    
+
     const getTestResults = await getAll();
     setTestResults(getTestResults);
   }, [])
@@ -32,7 +35,16 @@ export default () => {
       {/* Cards */}
       <DashboardCards cardValues={cardValues} />
       {/* All Results */}
-      <ResultList testResults={testResults} />
+      <ResultList
+        testResults={
+          filter === 'passed' ?
+            testResults.filter(test => test.obtainedMarks >= test.Test.passMarks) :
+            filter === 'failed' ?
+              testResults.filter(test => test.obtainedMarks < test.Test.passMarks) :
+              testResults
+        }
+        setFilter={changeFilter}
+      />
     </AdminDashboardLayout>
   );
 };

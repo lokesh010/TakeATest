@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-
+import { Link } from 'react-router-dom'
 
 const tableColumns = ['S.N', 'Name', 'Description', 'Pass Marks', 'Total Marks', 'Actions'];
 
@@ -37,12 +37,20 @@ export default React.memo(({ testList, deleteHandler }) => {
                                                 <td className="text-info">{test.passMarks}</td>
                                                 <td><span className="text-success">{test.totalMarks}</span></td>
                                                 <td>
-                                                    <Button variant="danger text-white" onClick={()=>{
-                                                        setDeleteId(test.id);
-                                                        handleShow();
+                                                    <div className="d-flex">
+                                                        <Link to={`/admin/test/${test.id}/questions`}>
+                                                            <Button variant="primary mr-2">
+                                                                <i className="fas fa-eye"></i>
+                                                            </Button>
+                                                        </Link>
+                                                        <Button variant="danger text-white" onClick={() => {
+                                                            setDeleteId(test.id);
+                                                            handleShow();
                                                         }}>
-                                                        Delete
-                                                    </Button>
+                                                            <i className="fas fa-trash"></i>
+
+                                                        </Button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         )
@@ -64,12 +72,12 @@ export default React.memo(({ testList, deleteHandler }) => {
                     <Button variant="outline-secondary" onClick={handleClose}>
                         No
                     </Button>
-                        <Button variant="danger text-white" onClick={()=>{
-                            deleteHandler(deleteId);
-                            handleClose();
-                        }}>
-                            Delete
-                        </Button>
+                    <Button variant="danger text-white" onClick={() => {
+                        deleteHandler(deleteId);
+                        handleClose();
+                    }}>
+                        Delete
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

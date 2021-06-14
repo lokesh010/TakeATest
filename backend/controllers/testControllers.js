@@ -36,6 +36,7 @@ exports.destroy = async (req, res) => {
   }
 }
 
+// relation
 exports.questionsByTest = async (req, res) => {
   try {
     const QuestionsByTest = await Questions.findAll({

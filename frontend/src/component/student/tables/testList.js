@@ -36,11 +36,11 @@ export default React.memo(({ testList }) => {
                                             <td className="text-info">{test.passMarks}</td>
                                             <td><span className="text-success">{test.totalMarks}</span></td>
                                             <td>
-                                                <Button variant="primary" onClick={()=> {
+                                                <Button variant="primary" onClick={() => {
                                                     handleShow();
                                                     setselectedTestId(test.id);
-                                                    }}>
-                                                    Take Test
+                                                }}>
+                                                    <i class="fas fa-hand-paper"></i>
                                                 </Button>
                                             </td>
                                         </tr>
@@ -62,9 +62,9 @@ export default React.memo(({ testList }) => {
                             No
                         </Button>
                         <Link to={`/student/test/${selectedTestId}/take`}>
-                        <Button variant="primary" onClick={handleClose}>
-                            Yes
-                        </Button>
+                            <Button variant="primary" onClick={handleClose}>
+                                Yes
+                            </Button>
                         </Link>
                     </Modal.Footer>
                 </Modal>

@@ -29,27 +29,3 @@ exports.createWithAnswers = async (req, res) => {
     });
   }
 }
-
-exports.read = async (req, res) => {
-  try {
-    const testList = await Questions.findAll({ order: ['createdAt'] });
-
-    return res.json(testList);
-  } catch (err) {
-    return res.status(400).json({
-      error: "Error getting tests",
-    });
-  }
-}
-
-exports.destroy = async (req, res) => {
-  try {
-    const deletedTest = await Tests.destroy({ where: { id: req.params.id } });
-
-    return res.json(deletedTest);
-  } catch (err) {
-    return res.status(400).json({
-      error: "Error deleting test",
-    });
-  }
-}

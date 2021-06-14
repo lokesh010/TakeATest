@@ -1,13 +1,13 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 // action
 import { isAuth } from "./action/authAction";
 // component
 const TestResults = React.lazy(() => import("./containers/admin/testResults"));
-const Question = React.lazy(() => import("./containers/admin/question"));
+const Question = React.lazy(() => import("./containers/admin/createQuestion"));
 const HomeAdmin = React.lazy(() => import("./containers/admin"));
 const Test = React.lazy(() => import("./containers/admin/testList"));
+const ViewQuestion = React.lazy(() => import("./containers/admin/viewQuestion"));
 const HomeStudent = React.lazy(() => import("./containers/student"));
 const TestList = React.lazy(() => import("./containers/student/testList"));
 const CheckTestAnswers = React.lazy(() => import("./containers/checkTestAnswers"));
@@ -55,6 +55,9 @@ function App() {
             </AdminRoutes>
             <AdminRoutes path="/admin/test/results">
               <TestResults />
+            </AdminRoutes>
+            <AdminRoutes path="/admin/test/:id/questions">
+              <ViewQuestion />
             </AdminRoutes>
             <AdminRoutes path="/admin/user/:UserId/test/:TestId/take/:take_count" exact>
               <CheckTestAnswers role={isAuth() && isAuth().role} />

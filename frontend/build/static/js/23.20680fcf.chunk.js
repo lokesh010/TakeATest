@@ -1,2 +1,0 @@
-(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[23],{90:function(t,e,c){"use strict";c.r(e);var n=c(0),s=c(2),r=c(9),d=c(1);e.default=Object(s.h)((function(t){var e=t.history;return Object(n.useEffect)((function(){Object(r.c)()&&"admin"===Object(r.c)().role?e.push("/admin/dashboard"):Object(r.c)()&&"student"===Object(r.c)().role&&e.push("/student/dashboard")}),[]),Object(d.jsx)("div",{})}))}}]);
-//# sourceMappingURL=23.20680fcf.chunk.js.map
