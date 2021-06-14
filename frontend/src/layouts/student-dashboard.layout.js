@@ -110,7 +110,7 @@ function DashboardLayout({ title, children, history }) {
                 </div>
                 {children}
                 {/* footer */}
-                <footer className="footer text-center"> TakeATest </footer>
+                <footer className="footer text-center">TakeATest</footer>
             </div>
         </div>
     )
