@@ -33,7 +33,7 @@ const SigninComponent = ({ history, role }) => {
             setValues({ ...values, error: data.error, loading: false });
           } else {
             //save user token to cookie
-            //save user info to localStroage
+            //save user info to localStorage
             //authenticate user
             autheticate(data, () => {
               if (isAuth() && isAuth().role === 'admin') {

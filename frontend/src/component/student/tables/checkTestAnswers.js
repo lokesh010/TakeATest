@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+import { Modal, Button } from 'react-bootstrap'
 // layout
 import StudentDashboardLayout from '../../../layouts/student-dashboard.layout'
 // action
-import { create, getMyTestAnswers } from '../../../action/resultsAction'
+import { getMyTestAnswers } from '../../../action/resultsAction'
 
 const CheckTestAnswers = () => {
     const { TestId, take_count } = useParams();
+    // model
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const [testAnswers, setTestAnswers] = useState([]);
     const [uniqueQuestions, setUniqueQuestions] = useState([]);
@@ -38,42 +43,50 @@ const CheckTestAnswers = () => {
                             {/* Accordion header */}
                             <div className="card-header bg-dark text-white text-left">
                                 <h5 className="my-2 p-2">
-                                    {i + 1}) {question.question} <b>[ {testAnswers.find(result=> result.QuestionId === question.id).marks} ]</b>
+                                    {i + 1}) {question.question} <b>[ {testAnswers.find(result => result.QuestionId === question.id).marks} ]</b>
                                 </h5>
                             </div>
 
                             {/* Answers */}
                             <div className="row">
-                                {testAnswers.map(result => 
+                                {testAnswers.map(result =>
                                     (result.QuestionId === question.id) &&
-                                                <div id={result.id} className="col-md-2 col-sm-12">
-                                                <div className="card-body">
-                                                    <div>
-                                                        {/* answers */}
-                                                        <div style={{ alignItems: 'baseline' }} key={result.Answer.id}>
-                                                            {/* checkbox */}
-                                                            <input type="checkbox"
-                                                                checked={result.chosen}
-                                                            />
-                                                            {/* answer */}
-                                                            <label className={` ml-1 
+                                    <div id={result.id} className="col-md-2 col-sm-12">
+                                        <div className="card-body">
+                                            <div>
+                                                {/* answers */}
+                                                <div style={{ alignItems: 'baseline' }} key={result.Answer.id}>
+                                                    {/* checkbox */}
+                                                    <input type="checkbox"
+                                                        checked={result.chosen}
+                                                    />
+                                                    {/* answer */}
+                                                    <label className={` ml-1 
                                                             ${(result.correct) ? 'text-success' :
-                                                                    (!result.correct && result.chosen) ? 'text-danger' : null}
+                                                            (!result.correct && result.chosen) ? 'text-danger' : null}
                                                             `}
-                                                                style={{ cursor: 'pointer' }}>
-                                                                {result.Answer.answer}
-                                                            </label>
-                                                        </div>
-                                                        {/* )} */}
-                                                    </div>
+                                                        style={{ cursor: 'pointer' }}>
+                                                        {result.Answer.answer}
+                                                    </label>
                                                 </div>
+                                                {/* )} */}
                                             </div>
-                                        )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                         </div>
                     )}
                 </div>
+                    {/* go back button */}
+                <Link to={`/student/results`}>
+                    <div className="text-left">
+                        <button className="btn btn-primary p-3 text-white">
+                            Go Back
+                        </button>
+                    </div>
+                </Link>
             </div>
         </StudentDashboardLayout>
     );

@@ -58,7 +58,7 @@ function DashboardLayout({ title, children, history }) {
                             </li>
                             {/* profile */}
                             <li className="sidebar-item">
-                                <Link to='/admin/myprofile'>
+                                <Link to='/myprofile'>
                                     <div className="sidebar-link waves-effect waves-dark sidebar-link"
                                         aria-expanded="false">
                                         <i className="fa fa-user" aria-hidden="true"></i>

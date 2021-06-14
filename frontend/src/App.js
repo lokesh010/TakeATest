@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AdminRoutes from './component/private/AdminRoutes'
 import StudentRoutes from './component/private/StudentRoutes'
+import AuthRoutes from './component/private/AuthRoutes'
 // component
+import Profile from "./component/profile";
 import Protected from "./component/private/Protected";
 import Question from "./component/admin/question";
 import HomeAdmin from "./component/admin";
@@ -31,7 +33,10 @@ function App() {
           {/* logins */}
           <Route path="/student/signin" component={StudentSignin} exact />
           <Route path="/admin/signin" component={AdminSignin} exact />
-
+          {/* Auth Routes */}
+          <AuthRoutes path="/myprofile" exact>
+            <Profile />
+          </AuthRoutes>
           {/* admin protected routes */}
           <AdminRoutes path="/admin/dashboard" exact>
             <HomeAdmin />
@@ -42,7 +47,6 @@ function App() {
           <AdminRoutes path="/admin/question">
             <Question />
           </AdminRoutes>
-
           {/* student protected routes */}
           <StudentRoutes path="/student/dashboard" exact>
             <HomeStudent />
