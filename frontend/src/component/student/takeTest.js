@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'
+import { useParams,withRouter } from 'react-router-dom'
 // layout
 import StudentDashboardLayout from '../../layouts/student-dashboard.layout'
 // action
 import { create } from '../../action/resultsAction'
 import { getTestQuestions } from '../../action/testAction'
 
-const Test = () => {
+const Test = ({history}) => {
     const { id } = useParams();
 
     const [questions, setQuestions] = useState([]);
@@ -42,7 +42,7 @@ const Test = () => {
         const submit = await create(answers);
 
         if(submit.status === 200){
-            
+            history.push('/student/results')
         }
     }
 
@@ -124,7 +124,7 @@ const Test = () => {
     );
 };
 
-export default Test;
+export default withRouter(Test);
 
 /*
 anwers: [
