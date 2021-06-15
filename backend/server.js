@@ -24,13 +24,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 
-//allow cors on development
-// if (process.env.NODE_ENV == "development") {
+//routes middleware
+app.use("/api", apiRoutes);
 
-//   app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
-
-// }
-  if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   // Serve a static assets if in productions
   // Set a static folder
   app.use(express.static(path.join(__dirname, "../frontend/build")))
@@ -41,9 +38,6 @@ app.use(cookieParser());
 
   console.log("Sent file to build index.html")
 }
-
-//routes middleware
-app.use("/api", apiRoutes);
 
 //port
 const port = process.env.PORT || 5000;
