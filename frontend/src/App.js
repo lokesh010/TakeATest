@@ -1,7 +1,5 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// action
-import { isAuth } from "./action/authAction";
 // component
 const TestResults = React.lazy(() => import("./containers/admin/testResults"));
 const Question = React.lazy(() => import("./containers/admin/createQuestion"));
@@ -10,7 +8,8 @@ const Test = React.lazy(() => import("./containers/admin/testList"));
 const ViewQuestion = React.lazy(() => import("./containers/admin/viewQuestion"));
 const HomeStudent = React.lazy(() => import("./containers/student"));
 const TestList = React.lazy(() => import("./containers/student/testList"));
-const CheckTestAnswers = React.lazy(() => import("./containers/checkTestAnswers"));
+const CheckUserTestAnswers = React.lazy(() => import("./containers/admin/checkTestAnswers"));
+const CheckMyTestAnswers = React.lazy(() => import("./containers/student/checkTestAnswers"));
 const TakeTest = React.lazy(() => import("./containers/student/takeTest"));
 const MyResults = React.lazy(() => import("./containers/student/myResults"));
 const Protected = React.lazy(() => import("./component/private/Protected"));
@@ -60,7 +59,7 @@ function App() {
               <ViewQuestion />
             </AdminRoutes>
             <AdminRoutes path="/admin/user/:UserId/test/:TestId/take/:take_count" exact>
-              <CheckTestAnswers role={isAuth() && isAuth().role} />
+              <CheckUserTestAnswers />
             </AdminRoutes>
             {/* student protected routes */}
             <StudentRoutes path="/student/dashboard" exact>
@@ -76,7 +75,7 @@ function App() {
               <MyResults />
             </StudentRoutes>
             <StudentRoutes path="/student/test/:TestId/take/:take_count" exact>
-              <CheckTestAnswers role={isAuth() && isAuth().role} />
+              <CheckMyTestAnswers />
             </StudentRoutes>
             {/* 404 */}
             <Route path="/*" component={Page404} exact />

@@ -1,0 +1,2 @@
+(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[24],{96:function(n,t,e){"use strict";e.r(t),e.d(t,"default",(function(){return s}));var c=e(36),r=e(66),i=e(2),a=e(32),b=e(1),o=["children"];function s(n){var t=n.children,e=Object(r.a)(n,o);return Object(b.jsx)(i.b,Object(c.a)(Object(c.a)({},e),{},{render:function(){return Object(a.c)()&&"admin"===Object(a.c)().role?t:Object(b.jsx)(i.a,{to:"/admin/signin"})}}))}}}]);
+//# sourceMappingURL=24.b0aced49.chunk.js.map
