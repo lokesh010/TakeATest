@@ -1,9 +1,9 @@
 ## This is a NODEJS,React and MYSQL
 
 ## Live
-```
 
-http://13.235.13.33
+```
+http://3.109.47.43:5000/
 
 Student
     studentone@test.com
@@ -22,7 +22,7 @@ Admin
 
 ### How to setup this code
 
-First of all 
+First of all
 
 create database named `takeatest` and execute all commands from takeAtest.sql in home dir
 Then
@@ -49,11 +49,11 @@ That's it for backend
 
 then go to the `frontend` folder
 
-first you need to install whole package 
+first you need to install whole package
 
 `npm install`
 
-then 
+then
 
 `npm start`
 
@@ -61,12 +61,12 @@ Thats it
 
 note: if you face any problem then please contact with me through phone or email.
 
-This code was written for the demonstration purpose for [Audio Bee](https://theaudiobee.com)
+## All scripts to make runnable
 
-## All scripts to make runnable 
 ```
 create database takeatest; (then execute takeAtest.sql)
 `git clone https://github.com/lokesh010/TakeATest.git`
 (copy .env.example to .env with environment vairables)
 `cd frontend && npm i && cd ../backend && npm i`
 `npm run dev`
+```
