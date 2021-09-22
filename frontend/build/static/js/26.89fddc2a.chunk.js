@@ -1,2 +1,0 @@
-(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[26],{97:function(t,n,e){"use strict";e.r(n),e.d(n,"default",(function(){return o}));var c=e(36),r=e(66),s=e(2),u=e(32),i=e(1),b=["children"];function o(t){var n=t.children,e=Object(r.a)(t,b);return Object(i.jsx)(s.b,Object(c.a)(Object(c.a)({},e),{},{render:function(){return Object(u.c)()&&"student"===Object(u.c)().role?n:Object(i.jsx)(s.a,{to:"/student/signin"})}}))}}}]);
-//# sourceMappingURL=26.89fddc2a.chunk.js.map
