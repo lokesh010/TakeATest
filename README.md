@@ -20,6 +20,12 @@ Admin
     123123
 ```
 
+## API Endpoint
+
+```
+http://65.0.3.186:5000/api
+```
+
 ### How to setup this code
 
 First of all
