@@ -3,7 +3,7 @@
 ## Live
 
 ```
-http://65.0.3.186:8080/
+http://65.0.3.186:5000/
 
 Student
     studentone@test.com
@@ -18,12 +18,6 @@ Admin
 
     admintwo@test.com
     123123
-```
-
-## API Endpoint
-
-```
-http://65.0.3.186:5000/api
 ```
 
 ### How to setup this code
