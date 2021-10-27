@@ -1,10 +1,5 @@
 ## This is a NODEJS,React and MYSQL
 
-## Live
-
-```
-http://65.0.3.186:5000/
-
 Student
     studentone@test.com
     123123
