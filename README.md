@@ -1,20 +1,5 @@
 ## This is a NODEJS,React and MYSQL
 
-Student
-    studentone@test.com
-    123123
-
-    studenttwo@test.com
-    123123
-
-Admin
-    adminone@test.com
-    123123
-
-    admintwo@test.com
-    123123
-```
-
 ### How to setup this code
 
 First of all
